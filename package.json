@@ -22,5 +22,9 @@
   "bugs": {
     "url": "https://github.com/Munter/fusile/issues"
   },
-  "homepage": "https://github.com/Munter/fusile"
+  "homepage": "https://github.com/Munter/fusile",
+  "dependencies": {
+    "errno": "^0.1.1",
+    "fuse4js": "^0.1.10"
+  }
 }
