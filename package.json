@@ -5,7 +5,9 @@
   "main": "lib/index.js",
   "scripts": {
     "lint": "jshint .",
-    "test": "npm run lint && mocha"
+    "test": "npm run lint && mocha",
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- --reporter dot",
+    "travis": "npm run lint && npm run coverage"
   },
   "repository": {
     "type": "git",
@@ -32,7 +34,10 @@
     "rimraf": "^2.2.8"
   },
   "devDependencies": {
+    "coveralls": "^2.11.2",
+    "istanbul": "^0.3.5",
     "mocha": "^2.1.0",
+    "mocha-lcov-reporter": "0.0.1",
     "unexpected": "^5.9.1"
   }
 }
