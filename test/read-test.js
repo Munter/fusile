@@ -75,6 +75,7 @@ describe('when reading files from the mounted filesystem', function () {
 
   it('should read a file', function (done) {
     fs.readFile(mnt + '/less/basic.less', { encoding: 'utf-8' }, function (err, data) {
+      expect(err, 'to be null');
       expect(data, 'to be a string');
       expect(data.toString(), 'to be', '@color: #428bca;\n\n.test {\n  color: @color;\n}\n');
 
