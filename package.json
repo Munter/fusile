@@ -4,7 +4,8 @@
   "description": "A web asset precompiling file system proxy",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "jshint .",
+    "test": "npm run lint && mocha"
   },
   "repository": {
     "type": "git",
