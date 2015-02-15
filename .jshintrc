@@ -82,5 +82,11 @@
 
     // Custom Globals
     "predef"        : [         // additional predefined global variables
+      "describe",
+      "before",
+      "after",
+      "beforeEach",
+      "afterEach",
+      "it"
     ]
 }
