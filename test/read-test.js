@@ -2,8 +2,11 @@
 
 var fusile = require('../lib/');
 var fs = require('fs');
+var path = require('path');
 var mkdirp = require('mkdirp');
 var rimraf = require('rimraf');
+var glob = require('glob');
+var async = require('async');
 var expect = require('unexpected');
 
 var src = 'test/fixtures';
@@ -81,6 +84,33 @@ describe('when reading files from the mounted filesystem', function () {
       expect(data.toString(), 'to be', 'I am the same\n');
 
       done();
+    });
+  });
+
+  it('should serve files with identical content to the source', function (done) {
+    glob('**/expected/basic.*', {
+      cwd: src
+    }, function (err, files) {
+      expect(err, 'to be null');
+
+      async.eachSeries(files, function (file, callback) {
+        async.parallel([
+          function (cb) {
+            fs.readFile(path.join(src, file), 'utf-8', cb);
+          },
+          function (cb) {
+            fs.readFile(path.join(mnt, file), 'utf-8', cb);
+          }
+        ], function (err, results) {
+          expect(err, 'to be undefined');
+          expect(results[0], 'to be', results[1]);
+
+          callback(err);
+        });
+      }, function (err) {
+        expect(err, 'to be undefined');
+        done();
+      });
     });
   });
 });
