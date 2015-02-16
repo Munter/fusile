@@ -113,4 +113,36 @@ describe('when reading files from the mounted filesystem', function () {
       });
     });
   });
+
+  it('should serve precompiled files that match the source expectation', function (done) {
+    glob('**/expected/basic.*', {
+      cwd: src
+    }, function (err, files) {
+      expect(err, 'to be null');
+
+      async.eachSeries(files, function (file, callback) {
+        async.parallel([
+          function (cb) {
+            var pattern = file.replace('/expected', '').replace(/\.[^\.]+$/, '*');
+            glob(pattern, {
+              cwd: mnt
+            }, function (err, files) {
+              fs.readFile(path.join(mnt, files.pop()), 'utf-8', cb);
+            });
+          },
+          function (cb) {
+            fs.readFile(path.join(src, file), 'utf-8', cb);
+          }
+        ], function (err, results) {
+          expect(err, 'to be undefined');
+          expect(results[0], 'to be', results[1]);
+
+          callback(err);
+        });
+      }, function (err) {
+        expect(err, 'to be undefined');
+        done();
+      });
+    });
+  });
 });
