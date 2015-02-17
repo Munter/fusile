@@ -34,6 +34,7 @@
     "rimraf": "^2.2.8"
   },
   "devDependencies": {
+    "6to5": "^3.6.5",
     "async": "^0.9.0",
     "coveralls": "^2.11.2",
     "glob": "^4.3.5",
