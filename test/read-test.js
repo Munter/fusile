@@ -9,7 +9,8 @@ var glob = require('glob');
 var async = require('async');
 var expect = require('unexpected');
 
-var src = 'test/fixtures';
+var src = 'test/fixtures/source';
+var compiled = 'test/fixtures/compiled';
 var mnt = 'test/READ';
 
 describe('when reading files from the mounted filesystem', function () {
@@ -87,35 +88,35 @@ describe('when reading files from the mounted filesystem', function () {
     });
   });
 
-  it('should serve files with identical content to the source', function (done) {
-    glob('**/expected/basic.*', {
-      cwd: src
-    }, function (err, files) {
-      expect(err, 'to be null');
+  // it('should serve files with identical content to the source', function (done) {
+  //   glob('**/basic.*', {
+  //     cwd: compiled
+  //   }, function (err, files) {
+  //     expect(err, 'to be null');
 
-      async.eachSeries(files, function (file, callback) {
-        async.parallel([
-          function (cb) {
-            fs.readFile(path.join(src, file), 'utf-8', cb);
-          },
-          function (cb) {
-            fs.readFile(path.join(mnt, file), 'utf-8', cb);
-          }
-        ], function (err, results) {
-          expect(err, 'to be undefined');
-          expect(results[0], 'to be', results[1]);
+  //     async.eachSeries(files, function (file, callback) {
+  //       async.parallel([
+  //         function (cb) {
+  //           fs.readFile(path.join(mnt, file), 'utf-8', cb);
+  //         },
+  //         function (cb) {
+  //           fs.readFile(path.join(compiled, file), 'utf-8', cb);
+  //         }
+  //       ], function (err, results) {
+  //         expect(err, 'to be undefined');
+  //         expect(results[0], 'to be', results[1]);
 
-          callback(err);
-        });
-      }, function (err) {
-        expect(err, 'to be undefined');
-        done();
-      });
-    });
-  });
+  //         callback(err);
+  //       });
+  //     }, function (err) {
+  //       expect(err, 'to be undefined');
+  //       done();
+  //     });
+  //   });
+  // });
 
   it('should serve precompiled files that match the source expectation', function (done) {
-    glob('**/expected/basic.*', {
+    glob('**/basic.*', {
       cwd: src
     }, function (err, files) {
       expect(err, 'to be null');
@@ -123,15 +124,10 @@ describe('when reading files from the mounted filesystem', function () {
       async.eachSeries(files, function (file, callback) {
         async.parallel([
           function (cb) {
-            var pattern = file.replace('/expected', '').replace(/\.[^\.]+$/, '*');
-            glob(pattern, {
-              cwd: mnt
-            }, function (err, files) {
-              fs.readFile(path.join(mnt, files.pop()), 'utf-8', cb);
-            });
+            fs.readFile(path.join(mnt, file), 'utf-8', cb);
           },
           function (cb) {
-            fs.readFile(path.join(src, file), 'utf-8', cb);
+            fs.readFile(path.join(compiled, file), 'utf-8', cb);
           }
         ], function (err, results) {
           expect(err, 'to be undefined');
