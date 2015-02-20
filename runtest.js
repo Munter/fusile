@@ -8,7 +8,7 @@ var testTarget = '__TEST_MOUNT_POINT';
 
 mkdirp(testTarget);
 
-fusile('test/fixtures', testTarget);
+fusile('test/fixtures/source', testTarget);
 
 // Start reading from stdin
 process.stdin.resume();
