@@ -41,7 +41,7 @@ describe('In a mounted filesystem', function () {
     fs.readdir(mnt, function (err, files) {
       expect(err, 'to be null');
       expect(files, 'to exhaustively satisfy', [
-        '6to5',
+        'babel',
         'coco',
         'coffee',
         'csso',
@@ -117,9 +117,9 @@ describe('In a mounted filesystem', function () {
   // });
 
   describe('when reading uncompiled files', function () {
-    it('should compile 6to5/basic.js', function (done) {
-      var actual = path.join(mnt, '6to5/basic.js');
-      var expected = path.join(compiled, '6to5/basic.js');
+    it('should compile babel/basic.jsx', function (done) {
+      var actual = path.join(mnt, 'babel/basic.jsx');
+      var expected = path.join(compiled, 'babel/basic.js');
 
       async.parallel([
         fs.readFile.bind(undefined, actual, 'utf-8'),
@@ -194,7 +194,7 @@ describe('In a mounted filesystem', function () {
 
     it('should compile ejs/basic.ejs', function (done) {
       var actual = path.join(mnt, 'ejs/basic.ejs');
-      var expected = path.join(compiled, 'ejs/basic.js');
+      var expected = path.join(compiled, 'ejs/basic.html');
 
       async.parallel([
         fs.readFile.bind(undefined, actual, 'utf-8'),
