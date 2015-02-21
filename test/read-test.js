@@ -1,6 +1,7 @@
 'use strict';
 
 var fusile = require('../lib/');
+var unmount = require('../lib/unmount');
 var fs = require('fs');
 var path = require('path');
 var mkdirp = require('mkdirp');
@@ -14,25 +15,26 @@ var mnt = 'test/READ';
 
 describe('In a mounted filesystem', function () {
   before(function (done) {
-    mkdirp(mnt, function (err) {
-      if (err) {
-        console.error(err);
-        process.exit(-1);
-      }
+    unmount(mnt, function () {
+      mkdirp(mnt, function (err) {
+        if (err) {
+          console.error(err);
+          process.exit(-1);
+        }
 
-      fusile(src, mnt);
+        fusile(src, mnt);
 
-      setTimeout(done, 100);
+        setTimeout(done, 300);
+      });
     });
-
   });
 
   after(function (done) {
     setTimeout(function () {
-      require('../lib/unmount')(mnt, function () {
+      unmount(mnt, function () {
         rimraf(mnt, done);
       });
-    }, 100);
+    }, 300);
   });
 
   it('should read a directory', function (done) {
