@@ -5,7 +5,6 @@ var fs = require('fs');
 var path = require('path');
 var mkdirp = require('mkdirp');
 var rimraf = require('rimraf');
-var glob = require('glob');
 var async = require('async');
 var expect = require('unexpected');
 
