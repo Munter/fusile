@@ -162,20 +162,20 @@ describe('In a mounted filesystem', function () {
       });
     });
 
-    it('should compile csso/basic.css', function (done) {
-      var actual = path.join(mnt, 'csso/basic.css');
-      var expected = path.join(compiled, 'csso/basic.css');
+    // it('should compile csso/basic.css', function (done) {
+    //   var actual = path.join(mnt, 'csso/basic.css');
+    //   var expected = path.join(compiled, 'csso/basic.css');
 
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
+    //   async.parallel([
+    //     fs.readFile.bind(undefined, actual, 'utf-8'),
+    //     fs.readFile.bind(undefined, expected, 'utf-8')
+    //   ], function (err, results) {
+    //     expect(err, 'to be undefined');
+    //     expect(results[0], 'to be', results[1]);
 
-        done();
-      });
-    });
+    //     done();
+    //   });
+    // });
 
     it('should compile dogescript/basic.djs', function (done) {
       var actual = path.join(mnt, 'dogescript/basic.djs');
@@ -192,20 +192,20 @@ describe('In a mounted filesystem', function () {
       });
     });
 
-    it('should compile ejs/basic.ejs', function (done) {
-      var actual = path.join(mnt, 'ejs/basic.ejs');
-      var expected = path.join(compiled, 'ejs/basic.html');
+    // it('should compile ejs/basic.ejs', function (done) {
+    //   var actual = path.join(mnt, 'ejs/basic.ejs');
+    //   var expected = path.join(compiled, 'ejs/basic.html');
 
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
+    //   async.parallel([
+    //     fs.readFile.bind(undefined, actual, 'utf-8'),
+    //     fs.readFile.bind(undefined, expected, 'utf-8')
+    //   ], function (err, results) {
+    //     expect(err, 'to be undefined');
+    //     expect(results[0], 'to be', results[1]);
 
-        done();
-      });
-    });
+    //     done();
+    //   });
+    // });
 
     it('should compile escape-html/basic.html', function (done) {
       var actual = path.join(mnt, 'escape-html/basic.html');
@@ -222,50 +222,50 @@ describe('In a mounted filesystem', function () {
       });
     });
 
-    it('should compile haml/basic.haml', function (done) {
-      var actual = path.join(mnt, 'haml/basic.haml');
-      var expected = path.join(compiled, 'haml/basic.html');
+    // it('should compile haml/basic.haml', function (done) {
+    //   var actual = path.join(mnt, 'haml/basic.haml');
+    //   var expected = path.join(compiled, 'haml/basic.html');
 
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
+    //   async.parallel([
+    //     fs.readFile.bind(undefined, actual, 'utf-8'),
+    //     fs.readFile.bind(undefined, expected, 'utf-8')
+    //   ], function (err, results) {
+    //     expect(err, 'to be undefined');
+    //     expect(results[0], 'to be', results[1]);
 
-        done();
-      });
-    });
+    //     done();
+    //   });
+    // });
 
-    it('should compile handlebars/basic.hbs', function (done) {
-      var actual = path.join(mnt, 'handlebars/basic.hbs');
-      var expected = path.join(compiled, 'handlebars/basic.html');
+    // it('should compile handlebars/basic.hbs', function (done) {
+    //   var actual = path.join(mnt, 'handlebars/basic.hbs');
+    //   var expected = path.join(compiled, 'handlebars/basic.html');
 
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
+    //   async.parallel([
+    //     fs.readFile.bind(undefined, actual, 'utf-8'),
+    //     fs.readFile.bind(undefined, expected, 'utf-8')
+    //   ], function (err, results) {
+    //     expect(err, 'to be undefined');
+    //     expect(results[0], 'to be', results[1]);
 
-        done();
-      });
-    });
+    //     done();
+    //   });
+    // });
 
-    it('should compile jade/basic.jade', function (done) {
-      var actual = path.join(mnt, 'jade/basic.jade');
-      var expected = path.join(compiled, 'jade/basic.html');
+    // it('should compile jade/basic.jade', function (done) {
+    //   var actual = path.join(mnt, 'jade/basic.jade');
+    //   var expected = path.join(compiled, 'jade/basic.html');
 
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
+    //   async.parallel([
+    //     fs.readFile.bind(undefined, actual, 'utf-8'),
+    //     fs.readFile.bind(undefined, expected, 'utf-8')
+    //   ], function (err, results) {
+    //     expect(err, 'to be undefined');
+    //     expect(results[0], 'to be', results[1]);
 
-        done();
-      });
-    });
+    //     done();
+    //   });
+    // });
 
     it('should compile less/basic.less', function (done) {
       var actual = path.join(mnt, 'less/basic.less');
@@ -297,20 +297,20 @@ describe('In a mounted filesystem', function () {
       });
     });
 
-    it('should compile marc/basic.md', function (done) {
-      var actual = path.join(mnt, 'marc/basic.md');
-      var expected = path.join(compiled, 'marc/basic.html');
+    // it('should compile marc/basic.md', function (done) {
+    //   var actual = path.join(mnt, 'marc/basic.md');
+    //   var expected = path.join(compiled, 'marc/basic.html');
 
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
+    //   async.parallel([
+    //     fs.readFile.bind(undefined, actual, 'utf-8'),
+    //     fs.readFile.bind(undefined, expected, 'utf-8')
+    //   ], function (err, results) {
+    //     expect(err, 'to be undefined');
+    //     expect(results[0], 'to be', results[1]);
 
-        done();
-      });
-    });
+    //     done();
+    //   });
+    // });
 
     it('should compile markdown/basic.md', function (done) {
       var actual = path.join(mnt, 'markdown/basic.md');
@@ -327,65 +327,65 @@ describe('In a mounted filesystem', function () {
       });
     });
 
-    it('should compile minify-css/basic.css', function (done) {
-      var actual = path.join(mnt, 'minify-css/basic.css');
-      var expected = path.join(compiled, 'minify-css/basic.css');
+    // it('should compile minify-css/basic.css', function (done) {
+    //   var actual = path.join(mnt, 'minify-css/basic.css');
+    //   var expected = path.join(compiled, 'minify-css/basic.css');
 
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
+    //   async.parallel([
+    //     fs.readFile.bind(undefined, actual, 'utf-8'),
+    //     fs.readFile.bind(undefined, expected, 'utf-8')
+    //   ], function (err, results) {
+    //     expect(err, 'to be undefined');
+    //     expect(results[0], 'to be', results[1]);
 
-        done();
-      });
-    });
+    //     done();
+    //   });
+    // });
 
-    it('should compile minify-html/basic.html', function (done) {
-      var actual = path.join(mnt, 'minify-html/basic.html');
-      var expected = path.join(compiled, 'minify-html/basic.html');
+    // it('should compile minify-html/basic.html', function (done) {
+    //   var actual = path.join(mnt, 'minify-html/basic.html');
+    //   var expected = path.join(compiled, 'minify-html/basic.html');
 
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
+    //   async.parallel([
+    //     fs.readFile.bind(undefined, actual, 'utf-8'),
+    //     fs.readFile.bind(undefined, expected, 'utf-8')
+    //   ], function (err, results) {
+    //     expect(err, 'to be undefined');
+    //     expect(results[0], 'to be', results[1]);
 
-        done();
-      });
-    });
+    //     done();
+    //   });
+    // });
 
-    it('should compile minify-js/basic.js', function (done) {
-      var actual = path.join(mnt, 'minify-js/basic.js');
-      var expected = path.join(compiled, 'minify-js/basic.js');
+    // it('should compile minify-js/basic.js', function (done) {
+    //   var actual = path.join(mnt, 'minify-js/basic.js');
+    //   var expected = path.join(compiled, 'minify-js/basic.js');
 
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
+    //   async.parallel([
+    //     fs.readFile.bind(undefined, actual, 'utf-8'),
+    //     fs.readFile.bind(undefined, expected, 'utf-8')
+    //   ], function (err, results) {
+    //     expect(err, 'to be undefined');
+    //     expect(results[0], 'to be', results[1]);
 
-        done();
-      });
-    });
+    //     done();
+    //   });
+    // });
 
-    it('should compile mustache/basic.mustache', function (done) {
-      var actual = path.join(mnt, 'mustache/basic.mustache');
-      var expected = path.join(compiled, 'mustache/basic.html');
+    // it('should compile mustache/basic.mustache', function (done) {
+    //   var actual = path.join(mnt, 'mustache/basic.mustache');
+    //   var expected = path.join(compiled, 'mustache/basic.html');
 
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
+    //   async.parallel([
+    //     fs.readFile.bind(undefined, actual, 'utf-8'),
+    //     fs.readFile.bind(undefined, expected, 'utf-8')
+    //   ], function (err, results) {
+    //     expect(err, 'to be undefined');
+    //     expect(results[0], 'to be', results[1]);
 
-        done();
-      });
-    });
+    //     done();
+    //   });
+    // });
 
     it('should compile myth/basic.myth', function (done) {
       var actual = path.join(mnt, 'myth/basic.myth');
@@ -432,35 +432,35 @@ describe('In a mounted filesystem', function () {
       });
     });
 
-    it('should compile swig/basic.swig', function (done) {
-      var actual = path.join(mnt, 'swig/basic.swig');
-      var expected = path.join(compiled, 'swig/basic.html');
+    // it('should compile swig/basic.swig', function (done) {
+    //   var actual = path.join(mnt, 'swig/basic.swig');
+    //   var expected = path.join(compiled, 'swig/basic.html');
 
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
+    //   async.parallel([
+    //     fs.readFile.bind(undefined, actual, 'utf-8'),
+    //     fs.readFile.bind(undefined, expected, 'utf-8')
+    //   ], function (err, results) {
+    //     expect(err, 'to be undefined');
+    //     expect(results[0], 'to be', results[1]);
 
-        done();
-      });
-    });
+    //     done();
+    //   });
+    // });
 
-    it('should compile toffee/basic.toffee', function (done) {
-      var actual = path.join(mnt, 'toffee/basic.toffee');
-      var expected = path.join(compiled, 'toffee/basic.html');
+    // it('should compile toffee/basic.toffee', function (done) {
+    //   var actual = path.join(mnt, 'toffee/basic.toffee');
+    //   var expected = path.join(compiled, 'toffee/basic.html');
 
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
+    //   async.parallel([
+    //     fs.readFile.bind(undefined, actual, 'utf-8'),
+    //     fs.readFile.bind(undefined, expected, 'utf-8')
+    //   ], function (err, results) {
+    //     expect(err, 'to be undefined');
+    //     expect(results[0], 'to be', results[1]);
 
-        done();
-      });
-    });
+    //     done();
+    //   });
+    // });
 
   });
 });
