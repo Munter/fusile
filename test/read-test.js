@@ -127,7 +127,13 @@ describe('when reading files from the mounted filesystem', function () {
             fs.readFile(path.join(mnt, file), 'utf-8', cb);
           },
           function (cb) {
-            fs.readFile(path.join(compiled, file), 'utf-8', cb);
+            var pattern = file.replace(/\.[^\.]+$/, '*');
+            glob(pattern, {
+              cwd: compiled
+            }, function (err, files) {
+              console.log(pattern, files);
+              fs.readFile(path.join(compiled, files.pop()), 'utf-8', cb);
+            });
           }
         ], function (err, results) {
           expect(err, 'to be undefined');
