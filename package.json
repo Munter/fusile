@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/Munter/fusile",
   "dependencies": {
-    "accord": "^0.14.4",
+    "accord": "^0.15.2",
     "errno": "^0.1.1",
     "fuse4js": "^0.1.10",
     "lodash": "^3.2.0",
