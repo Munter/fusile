@@ -26,11 +26,14 @@
     "url": "https://github.com/Munter/fusile/issues"
   },
   "homepage": "https://github.com/Munter/fusile",
+  "bin": "bin/fusile-bin.js",
+  "main": "lib/index.js",
   "dependencies": {
     "accord": "^0.15.2",
     "errno": "^0.1.1",
     "fuse4js": "^0.1.10",
     "lodash": "^3.2.0",
+    "minimist": "^1.1.0",
     "mkdirp": "^0.5.0",
     "rimraf": "^2.2.8"
   },
