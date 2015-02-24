@@ -15,7 +15,10 @@ var sourceDir = path.resolve(process.cwd(), argv._[0]);
 var mountPoint = path.resolve(process.cwd(), argv._[1]);
 
 mkdirp(mountPoint, function () {
-  fusile(sourceDir, mountPoint);
+  fusile(sourceDir, mountPoint, {
+    watches: argv.watch,
+    verbose: argv.v
+  });
 
   // Start reading from stdin
   process.stdin.resume();
