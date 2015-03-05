@@ -2,6 +2,8 @@
 
 A web asset precompiling file system proxy.
 
+Mounts a fuse file system on a target directory, auto loads available compilers, compiles assets on request, caches compiled assets if source file is unmodified, watches original file for changes on demand.
+
 ## Installation
 
 Prerequisites: [Fuse](https://github.com/bcle/fuse4js#requirements)
