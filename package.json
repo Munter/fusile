@@ -41,6 +41,7 @@
   "devDependencies": {
     "LiveScript": "^1.3.1",
     "async": "^0.9.0",
+    "autoprefixer": "^5.1.0",
     "babel": "^4.4.3",
     "coco": "^0.9.1",
     "coffee-script": "^1.9.1",
