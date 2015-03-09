@@ -34,7 +34,7 @@ describe('In a mounted filesystem', function () {
       unmount(mnt, function () {
         rimraf(mnt, done);
       });
-    }, 300);
+    }, 500);
   });
 
   it('should read a directory', function (done) {
