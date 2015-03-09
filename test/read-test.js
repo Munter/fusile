@@ -9,8 +9,8 @@ var rimraf = require('rimraf');
 var async = require('async');
 var expect = require('unexpected');
 
-var src = 'test/fixtures/source';
-var compiled = 'test/fixtures/compiled';
+var src = 'fixtures/source';
+var compiled = 'fixtures/compiled';
 var mnt = 'test/READ';
 
 describe('In a mounted filesystem', function () {
@@ -41,6 +41,7 @@ describe('In a mounted filesystem', function () {
     fs.readdir(mnt, function (err, files) {
       expect(err, 'to be null');
       expect(files, 'to exhaustively satisfy', [
+        'autoprefixer',
         'babel',
         'coco',
         'coffee',
@@ -396,7 +397,7 @@ describe('In a mounted filesystem', function () {
         fs.readFile.bind(undefined, expected, 'utf-8')
       ], function (err, results) {
         expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
+        expect(results[0], 'to be', results[1].replace(/\n$/, ''));
 
         done();
       });
