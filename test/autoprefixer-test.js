@@ -39,23 +39,78 @@ describe('Autoprefixer', function () {
     }, 500);
   });
 
-  describe('when reading an unprefixed files', function () {
-    it('should run', function () {
-      expect(true, 'to be true');
+  it('should prefix autoprefixer/unprefixed.css', function (done) {
+    var actual = path.join(mnt, 'autoprefixer/unprefixed.css');
+    var expected = path.join(compiled, 'autoprefixer/unprefixed.css');
+
+    async.parallel([
+      fs.readFile.bind(undefined, actual, 'utf-8'),
+      fs.readFile.bind(undefined, expected, 'utf-8')
+    ], function (err, results) {
+      expect(err, 'to be undefined');
+      expect(results[0], 'to be', results[1]);
+
+      done();
     });
-    it('should prefix autoprefixer/unprefixed.css', function (done) {
-      var actual = path.join(mnt, 'autoprefixer/unprefixed.css');
-      var expected = path.join(compiled, 'autoprefixer/unprefixed.css');
+  });
 
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
+  it('should prefix autoprefixer/unprefixed.scss', function (done) {
+    var actual = path.join(mnt, 'autoprefixer/unprefixed.scss');
+    var expected = path.join(compiled, 'autoprefixer/unprefixed.scss');
 
-        done();
-      });
+    async.parallel([
+      fs.readFile.bind(undefined, actual, 'utf-8'),
+      fs.readFile.bind(undefined, expected, 'utf-8')
+    ], function (err, results) {
+      expect(err, 'to be undefined');
+      expect(results[0], 'to be', results[1]);
+
+      done();
+    });
+  });
+
+  it('should prefix autoprefixer/unprefixed.less', function (done) {
+    var actual = path.join(mnt, 'autoprefixer/unprefixed.less');
+    var expected = path.join(compiled, 'autoprefixer/unprefixed.less');
+
+    async.parallel([
+      fs.readFile.bind(undefined, actual, 'utf-8'),
+      fs.readFile.bind(undefined, expected, 'utf-8')
+    ], function (err, results) {
+      expect(err, 'to be undefined');
+      expect(results[0], 'to be', results[1]);
+
+      done();
+    });
+  });
+
+  it('should prefix autoprefixer/unprefixed.myth', function (done) {
+    var actual = path.join(mnt, 'autoprefixer/unprefixed.myth');
+    var expected = path.join(compiled, 'autoprefixer/unprefixed.myth');
+
+    async.parallel([
+      fs.readFile.bind(undefined, actual, 'utf-8'),
+      fs.readFile.bind(undefined, expected, 'utf-8')
+    ], function (err, results) {
+      expect(err, 'to be undefined');
+      expect(results[0], 'to be', results[1]);
+
+      done();
+    });
+  });
+
+  it('should prefix autoprefixer/unprefixed.styl', function (done) {
+    var actual = path.join(mnt, 'autoprefixer/unprefixed.styl');
+    var expected = path.join(compiled, 'autoprefixer/unprefixed.styl');
+
+    async.parallel([
+      fs.readFile.bind(undefined, actual, 'utf-8'),
+      fs.readFile.bind(undefined, expected, 'utf-8')
+    ], function (err, results) {
+      expect(err, 'to be undefined');
+      expect(results[0], 'to be', results[1]);
+
+      done();
     });
   });
 });
