@@ -93,7 +93,7 @@ describe('Autoprefixer', function () {
       fs.readFile.bind(undefined, expected, 'utf-8')
     ], function (err, results) {
       expect(err, 'to be undefined');
-      expect(results[0], 'to be', results[1]);
+      expect(results[0], 'to be', results[1].replace(/\n$/, ''));
 
       done();
     });
