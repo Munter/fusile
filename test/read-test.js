@@ -284,7 +284,7 @@ describe('In a mounted filesystem', function () {
             done();
           });
         });
-      }, 100);
+      }, 50);
     });
 
     describe('compiled file with no partials, stylus/cache.styl', function () {
@@ -321,16 +321,14 @@ describe('In a mounted filesystem', function () {
         var spy = sinon.spy(this.fusile, 'emit');
 
         fs.utimes(path.join(src, 'stylus/cache.styl'), new Date(), new Date(), function () {
-          setTimeout(function () {
-            fs.readFile(path.join(mnt, 'stylus/cache.styl'), { encoding: 'utf-8' }, function (err) {
-              expect(err, 'to be null');
-              expect(spy, 'was called once');
-              expect(spy, 'was called with exactly', 'info', 'cache miss', '/stylus/cache.styl');
+          fs.readFile(path.join(mnt, 'stylus/cache.styl'), { encoding: 'utf-8' }, function (err) {
+            expect(err, 'to be null');
+            expect(spy, 'was called once');
+            expect(spy, 'was called with exactly', 'info', 'cache miss', '/stylus/cache.styl');
 
-              self.fusile.emit.restore();
-              done();
-            });
-          }, 100);
+            self.fusile.emit.restore();
+            done();
+          });
         });
       });
 
