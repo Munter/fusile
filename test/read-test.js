@@ -7,7 +7,11 @@ var path = require('path');
 var mkdirp = require('mkdirp');
 var rimraf = require('rimraf');
 var async = require('async');
-var expect = require('unexpected');
+
+var expect = require('unexpected').clone();
+expect.installPlugin(require('unexpected-sinon'));
+
+var sinon = require('sinon');
 
 var src = 'fixtures/source';
 var compiled = 'fixtures/compiled';
@@ -15,6 +19,7 @@ var mnt = 'test/READ';
 
 describe('In a mounted filesystem', function () {
   before(function (done) {
+    var self = this;
     unmount(mnt, function () {
       mkdirp(mnt, function (err) {
         if (err) {
@@ -22,7 +27,9 @@ describe('In a mounted filesystem', function () {
           process.exit(-1);
         }
 
-        fusile(src, mnt);
+        self.fusile = fusile(src, mnt, {
+          // verbose: true
+        });
 
         setTimeout(done, 300);
       });
@@ -255,5 +262,79 @@ describe('In a mounted filesystem', function () {
         done();
       });
     });
+  });
+
+  describe('when caching', function () {
+    it('should not have a cache hit on first read of non-compiled file', function (done) {
+      var self = this;
+
+      // For some reason the previous test leaks into this one when spying on emit
+      setTimeout(function () {
+        var spy = sinon.spy(self.fusile, 'emit');
+
+        fs.readFile(path.join(mnt, '/unchanged.txt'), { encoding: 'utf-8' }, function (err) {
+          expect(err, 'to be null');
+          expect(spy, 'was not called');
+
+          fs.readFile(path.join(mnt, '/unchanged.txt'), { encoding: 'utf-8' }, function (err) {
+            expect(err, 'to be null');
+            expect(spy, 'was not called');
+
+            self.fusile.emit.restore();
+            done();
+          });
+        });
+      }, 100);
+    });
+
+    describe('compiled file with no partials, stylus/cache.styl', function () {
+
+      it('should not have a cache hit on first read', function (done) {
+        var self = this;
+        var spy = sinon.spy(this.fusile, 'emit');
+
+        fs.readFile(path.join(mnt, 'stylus/cache.styl'), { encoding: 'utf-8' }, function (err) {
+          expect(err, 'to be null');
+          expect(spy, 'was not called');
+
+          self.fusile.emit.restore();
+          done();
+        });
+      });
+
+      it('should have a cache hit on second read', function (done) {
+        var self = this;
+        var spy = sinon.spy(this.fusile, 'emit');
+
+        fs.readFile(path.join(mnt, 'stylus/cache.styl'), { encoding: 'utf-8' }, function (err) {
+          expect(err, 'to be null');
+          expect(spy, 'was called once');
+          expect(spy, 'was called with exactly', 'info', 'cache hit', '/stylus/cache.styl');
+
+          self.fusile.emit.restore();
+          done();
+        });
+      });
+
+      it('should have a cache miss on third read when source file was updated', function (done) {
+        var self = this;
+        var spy = sinon.spy(this.fusile, 'emit');
+
+        fs.utimes(path.join(src, 'stylus/cache.styl'), new Date(), new Date(), function () {
+          setTimeout(function () {
+            fs.readFile(path.join(mnt, 'stylus/cache.styl'), { encoding: 'utf-8' }, function (err) {
+              expect(err, 'to be null');
+              expect(spy, 'was called once');
+              expect(spy, 'was called with exactly', 'info', 'cache miss', '/stylus/cache.styl');
+
+              self.fusile.emit.restore();
+              done();
+            });
+          }, 100);
+        });
+      });
+
+    });
+
   });
 });
