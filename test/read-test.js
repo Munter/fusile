@@ -334,5 +334,55 @@ describe('In a mounted filesystem', function () {
 
     });
 
+    describe('compiled file with no partials, scss/cache.scss', function () {
+
+      it.skip('should not have a cache hit on first read', function (done) {
+        var self = this;
+
+        setTimeout(function () {
+          var spy = sinon.spy(self.fusile, 'emit');
+
+          fs.readFile(path.join(mnt, 'scss/cache.scss'), { encoding: 'utf-8' }, function (err) {
+            expect(err, 'to be null');
+            expect(spy, 'was not called');
+
+            self.fusile.emit.restore();
+            done();
+          });
+        }, 50);
+      });
+
+      it('should have a cache hit on second read', function (done) {
+        var self = this;
+        var spy = sinon.spy(this.fusile, 'emit');
+
+        fs.readFile(path.join(mnt, 'scss/cache.scss'), { encoding: 'utf-8' }, function (err) {
+          expect(err, 'to be null');
+          expect(spy, 'was called once');
+          expect(spy, 'was called with exactly', 'info', 'cache hit', '/scss/cache.scss');
+
+          self.fusile.emit.restore();
+          done();
+        });
+      });
+
+      it.skip('should have a cache miss on third read when source file was updated', function (done) {
+        var self = this;
+        var spy = sinon.spy(this.fusile, 'emit');
+
+        fs.utimes(path.join(src, 'scss/cache.scss'), new Date(), new Date(), function () {
+          fs.readFile(path.join(mnt, 'scss/cache.scss'), { encoding: 'utf-8' }, function (err) {
+            expect(err, 'to be null');
+            expect(spy, 'was called once');
+            expect(spy, 'was called with exactly', 'info', 'cache miss', '/scss/cache.scss');
+
+            self.fusile.emit.restore();
+            done();
+          });
+        });
+      });
+
+    });
+
   });
 });
