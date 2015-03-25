@@ -336,7 +336,7 @@ describe('In a mounted filesystem', function () {
 
     describe('compiled file with no partials, scss/cache.scss', function () {
 
-      it.skip('should not have a cache hit on first read', function (done) {
+      it('should not have a cache hit on first read', function (done) {
         var self = this;
 
         setTimeout(function () {
@@ -366,7 +366,7 @@ describe('In a mounted filesystem', function () {
         });
       });
 
-      it.skip('should have a cache miss on third read when source file was updated', function (done) {
+      it('should have a cache miss on third read when source file was updated', function (done) {
         var self = this;
         var spy = sinon.spy(this.fusile, 'emit');
 
