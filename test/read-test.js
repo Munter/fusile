@@ -316,15 +316,17 @@ describe('In a mounted filesystem', function () {
       it('should have a cache miss on third read when source file was updated', function (done) {
         var self = this;
 
-        fs.utimes(path.join(src, 'stylus/cache.styl'), new Date(), new Date(), function () {
-          fs.readFile(path.join(mnt, 'stylus/cache.styl'), { encoding: 'utf-8' }, function (err) {
-            expect(err, 'to be null');
-            expect(self.emitSpy, 'was called once');
-            expect(self.emitSpy, 'was called with exactly', 'info', 'cache miss', '/stylus/cache.styl');
+        setTimeout(function () {
+          fs.utimes(path.join(src, 'stylus/cache.styl'), new Date(), new Date(), function () {
+            fs.readFile(path.join(mnt, 'stylus/cache.styl'), { encoding: 'utf-8' }, function (err) {
+              expect(err, 'to be null');
+              expect(self.emitSpy, 'was called once');
+              expect(self.emitSpy, 'was called with exactly', 'info', 'cache miss', '/stylus/cache.styl');
 
-            done();
+              done();
+            });
           });
-        });
+        }, 1000);
       });
 
     });
@@ -348,9 +350,6 @@ describe('In a mounted filesystem', function () {
         fs.readFile(path.join(mnt, 'scss/cache.scss'), { encoding: 'utf-8' }, function (err) {
           expect(err, 'to be null');
 
-          // expect(self.emitSpy, 'was called once');
-          // expect(self.emitSpy, 'was called with exactly', 'info', 'cache hit', '/scss/cache.scss');
-
           expect(self.emitSpy, 'was called');
           expect(self.emitSpy, 'was called with', 'info', 'cache hit', '/scss/cache.scss');
 
@@ -361,15 +360,18 @@ describe('In a mounted filesystem', function () {
       it('should have a cache miss on third read when source file was updated', function (done) {
         var self = this;
 
-        fs.utimes(path.join(src, 'scss/cache.scss'), new Date(), new Date(), function () {
-          fs.readFile(path.join(mnt, 'scss/cache.scss'), { encoding: 'utf-8' }, function (err) {
-            expect(err, 'to be null');
-            expect(self.emitSpy, 'was called once');
-            expect(self.emitSpy, 'was called with exactly', 'info', 'cache miss', '/scss/cache.scss');
+        setTimeout(function () {
+          fs.utimes(path.join(src, 'scss/cache.scss'), new Date(), new Date(), function () {
+              fs.readFile(path.join(mnt, 'scss/cache.scss'), { encoding: 'utf-8' }, function (err) {
+                expect(err, 'to be null');
+                expect(self.emitSpy, 'was called once');
+                expect(self.emitSpy, 'was called with exactly', 'info', 'cache miss', '/scss/cache.scss');
 
-            done();
+                done();
+              });
+
           });
-        });
+        }, 1000);
       });
 
     });
