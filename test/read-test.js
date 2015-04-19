@@ -374,6 +374,22 @@ describe('In a mounted filesystem', function () {
         }, 1000);
       });
 
+      it('should have a cache miss on fourth read when partial file was updated', function (done) {
+        var self = this;
+
+        setTimeout(function () {
+          fs.utimes(path.join(src, 'scss/_cache_partial.scss'), new Date(), new Date(), function () {
+              fs.readFile(path.join(mnt, 'scss/cache.scss'), { encoding: 'utf-8' }, function (err) {
+                expect(err, 'to be null');
+                expect(self.emitSpy, 'was called once');
+                expect(self.emitSpy, 'was called with exactly', 'info', 'cache miss', '/scss/cache.scss');
+
+                done();
+              });
+          });
+        }, 1000);
+      });
+
     });
 
   });
