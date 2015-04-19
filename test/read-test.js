@@ -265,68 +265,63 @@ describe('In a mounted filesystem', function () {
   });
 
   describe('when caching', function () {
+    beforeEach(function () {
+      this.emitSpy = sinon.spy(this.fusile, 'emit');
+    });
+    afterEach(function () {
+      this.fusile.emit.restore();
+    });
+
     it('should not have a cache hit on first read of non-compiled file', function (done) {
       var self = this;
 
-      // For some reason the previous test leaks into this one when spying on emit
-      setTimeout(function () {
-        var spy = sinon.spy(self.fusile, 'emit');
+      fs.readFile(path.join(mnt, '/unchanged.txt'), { encoding: 'utf-8' }, function (err) {
+        expect(err, 'to be null');
+        expect(self.emitSpy, 'was not called');
 
         fs.readFile(path.join(mnt, '/unchanged.txt'), { encoding: 'utf-8' }, function (err) {
           expect(err, 'to be null');
-          expect(spy, 'was not called');
+          expect(self.emitSpy, 'was not called');
 
-          fs.readFile(path.join(mnt, '/unchanged.txt'), { encoding: 'utf-8' }, function (err) {
-            expect(err, 'to be null');
-            expect(spy, 'was not called');
-
-            self.fusile.emit.restore();
-            done();
-          });
+          done();
         });
-      }, 50);
+      });
     });
 
     describe('compiled file with no partials, stylus/cache.styl', function () {
 
       it('should not have a cache hit on first read', function (done) {
         var self = this;
-        var spy = sinon.spy(this.fusile, 'emit');
 
         fs.readFile(path.join(mnt, 'stylus/cache.styl'), { encoding: 'utf-8' }, function (err) {
           expect(err, 'to be null');
-          expect(spy, 'was not called');
+          expect(self.emitSpy, 'was not called');
 
-          self.fusile.emit.restore();
           done();
         });
       });
 
       it('should have a cache hit on second read', function (done) {
         var self = this;
-        var spy = sinon.spy(this.fusile, 'emit');
 
         fs.readFile(path.join(mnt, 'stylus/cache.styl'), { encoding: 'utf-8' }, function (err) {
           expect(err, 'to be null');
-          expect(spy, 'was called once');
-          expect(spy, 'was called with exactly', 'info', 'cache hit', '/stylus/cache.styl');
+          expect(self.emitSpy, 'was called once');
+          expect(self.emitSpy, 'was called with exactly', 'info', 'cache hit', '/stylus/cache.styl');
 
-          self.fusile.emit.restore();
           done();
         });
       });
 
       it('should have a cache miss on third read when source file was updated', function (done) {
         var self = this;
-        var spy = sinon.spy(this.fusile, 'emit');
 
         fs.utimes(path.join(src, 'stylus/cache.styl'), new Date(), new Date(), function () {
           fs.readFile(path.join(mnt, 'stylus/cache.styl'), { encoding: 'utf-8' }, function (err) {
             expect(err, 'to be null');
-            expect(spy, 'was called once');
-            expect(spy, 'was called with exactly', 'info', 'cache miss', '/stylus/cache.styl');
+            expect(self.emitSpy, 'was called once');
+            expect(self.emitSpy, 'was called with exactly', 'info', 'cache miss', '/stylus/cache.styl');
 
-            self.fusile.emit.restore();
             done();
           });
         });
@@ -339,48 +334,39 @@ describe('In a mounted filesystem', function () {
       it('should not have a cache hit on first read', function (done) {
         var self = this;
 
-        setTimeout(function () {
-          var spy = sinon.spy(self.fusile, 'emit');
+        fs.readFile(path.join(mnt, 'scss/cache.scss'), { encoding: 'utf-8' }, function (err) {
+          expect(err, 'to be null');
+          expect(self.emitSpy, 'was not called');
 
-          fs.readFile(path.join(mnt, 'scss/cache.scss'), { encoding: 'utf-8' }, function (err) {
-            expect(err, 'to be null');
-            expect(spy, 'was not called');
-
-            self.fusile.emit.restore();
-            done();
-          });
-        }, 50);
+          done();
+        });
       });
 
       it('should have a cache hit on second read', function (done) {
         var self = this;
-        var spy = sinon.spy(this.fusile, 'emit');
 
         fs.readFile(path.join(mnt, 'scss/cache.scss'), { encoding: 'utf-8' }, function (err) {
           expect(err, 'to be null');
 
-          // expect(spy, 'was called once');
-          // expect(spy, 'was called with exactly', 'info', 'cache hit', '/scss/cache.scss');
+          // expect(self.emitSpy, 'was called once');
+          // expect(self.emitSpy, 'was called with exactly', 'info', 'cache hit', '/scss/cache.scss');
 
-          expect(spy, 'was called');
-          expect(spy, 'was called with', 'info', 'cache hit', '/scss/cache.scss');
+          expect(self.emitSpy, 'was called');
+          expect(self.emitSpy, 'was called with', 'info', 'cache hit', '/scss/cache.scss');
 
-          self.fusile.emit.restore();
           done();
         });
       });
 
       it('should have a cache miss on third read when source file was updated', function (done) {
         var self = this;
-        var spy = sinon.spy(this.fusile, 'emit');
 
         fs.utimes(path.join(src, 'scss/cache.scss'), new Date(), new Date(), function () {
           fs.readFile(path.join(mnt, 'scss/cache.scss'), { encoding: 'utf-8' }, function (err) {
             expect(err, 'to be null');
-            expect(spy, 'was called once');
-            expect(spy, 'was called with exactly', 'info', 'cache miss', '/scss/cache.scss');
+            expect(self.emitSpy, 'was called once');
+            expect(self.emitSpy, 'was called with exactly', 'info', 'cache miss', '/scss/cache.scss');
 
-            self.fusile.emit.restore();
             done();
           });
         });
