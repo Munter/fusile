@@ -50,7 +50,11 @@ describe('Autoprefixer', function () {
       expect(err, 'to be undefined');
       expect(results[0], 'to be', results[1]);
 
-      done();
+      // Now check the cached version
+      fs.readFile(actual, 'utf-8', function (err, result) {
+        expect(result, 'to be', results[1]);
+        done();
+      });
     });
   });
 
@@ -65,7 +69,11 @@ describe('Autoprefixer', function () {
       expect(err, 'to be undefined');
       expect(results[0], 'to be', results[1]);
 
-      done();
+      // Now check the cached version
+      fs.readFile(actual, 'utf-8', function (err, result) {
+        expect(result, 'to be', results[1]);
+        done();
+      });
     });
   });
 
@@ -80,7 +88,11 @@ describe('Autoprefixer', function () {
       expect(err, 'to be undefined');
       expect(results[0], 'to be', results[1]);
 
-      done();
+      // Now check the cached version
+      fs.readFile(actual, 'utf-8', function (err, result) {
+        expect(result, 'to be', results[1]);
+        done();
+      });
     });
   });
 
@@ -95,7 +107,11 @@ describe('Autoprefixer', function () {
       expect(err, 'to be undefined');
       expect(results[0], 'to be', results[1].replace(/\n$/, ''));
 
-      done();
+      // Now check the cached version
+      fs.readFile(actual, 'utf-8', function (err, result) {
+        expect(result, 'to be', results[1].replace(/\n$/, ''));
+        done();
+      });
     });
   });
 
@@ -110,7 +126,11 @@ describe('Autoprefixer', function () {
       expect(err, 'to be undefined');
       expect(results[0], 'to be', results[1]);
 
-      done();
+      // Now check the cached version
+      fs.readFile(actual, 'utf-8', function (err, result) {
+        expect(result, 'to be', results[1]);
+        done();
+      });
     });
   });
 });
