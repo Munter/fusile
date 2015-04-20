@@ -392,5 +392,66 @@ describe('In a mounted filesystem', function () {
 
     });
 
+    describe('compiled file with no partials, less/cache.less', function () {
+
+      it('should not have a cache hit on first read', function (done) {
+        var self = this;
+
+        fs.readFile(path.join(mnt, 'less/cache.less'), { encoding: 'utf-8' }, function (err) {
+          expect(err, 'to be null');
+          expect(self.emitSpy, 'was not called');
+
+          done();
+        });
+      });
+
+      it('should have a cache hit on second read', function (done) {
+        var self = this;
+
+        fs.readFile(path.join(mnt, 'less/cache.less'), { encoding: 'utf-8' }, function (err) {
+          expect(err, 'to be null');
+
+          expect(self.emitSpy, 'was called');
+          expect(self.emitSpy, 'was called with', 'info', 'cache hit', '/less/cache.less');
+
+          done();
+        });
+      });
+
+      it('should have a cache miss on third read when source file was updated', function (done) {
+        var self = this;
+
+        setTimeout(function () {
+          fs.utimes(path.join(src, 'less/cache.less'), new Date(), new Date(), function () {
+              fs.readFile(path.join(mnt, 'less/cache.less'), { encoding: 'utf-8' }, function (err) {
+                expect(err, 'to be null');
+                expect(self.emitSpy, 'was called once');
+                expect(self.emitSpy, 'was called with exactly', 'info', 'cache miss', '/less/cache.less');
+
+                done();
+              });
+
+          });
+        }, 1000);
+      });
+
+      it('should have a cache miss on fourth read when partial file was updated', function (done) {
+        var self = this;
+
+        setTimeout(function () {
+          fs.utimes(path.join(src, 'less/_cache_partial.less'), new Date(), new Date(), function () {
+              fs.readFile(path.join(mnt, 'less/cache.less'), { encoding: 'utf-8' }, function (err) {
+                expect(err, 'to be null');
+                expect(self.emitSpy, 'was called once');
+                expect(self.emitSpy, 'was called with exactly', 'info', 'cache miss', '/less/cache.less');
+
+                done();
+              });
+          });
+        }, 1000);
+      });
+
+    });
+
   });
 });
