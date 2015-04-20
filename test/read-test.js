@@ -1,7 +1,7 @@
 'use strict';
 
 var fusile = require('../lib/');
-var unmount = require('../lib/unmount');
+var fuse = require('fuse-bindings');
 var fs = require('fs');
 var path = require('path');
 var mkdirp = require('mkdirp');
@@ -20,7 +20,7 @@ var mnt = 'test/READ';
 describe('In a mounted filesystem', function () {
   before(function (done) {
     var self = this;
-    unmount(mnt, function () {
+    fuse.unmount(mnt, function () {
       mkdirp(mnt, function (err) {
         if (err) {
           console.error(err);
@@ -38,7 +38,7 @@ describe('In a mounted filesystem', function () {
 
   after(function (done) {
     setTimeout(function () {
-      unmount(mnt, function () {
+      fuse.unmount(mnt, function () {
         rimraf(mnt, done);
       });
     }, 500);
@@ -265,6 +265,10 @@ describe('In a mounted filesystem', function () {
   });
 
   describe('when caching', function () {
+    before(function (done) {
+      setTimeout(done, 200);
+    });
+
     beforeEach(function () {
       this.emitSpy = sinon.spy(this.fusile, 'emit');
     });
@@ -274,6 +278,8 @@ describe('In a mounted filesystem', function () {
 
     it('should not have a cache hit on first read of non-compiled file', function (done) {
       var self = this;
+
+      this.fusile.cache = {};
 
       fs.readFile(path.join(mnt, '/unchanged.txt'), { encoding: 'utf-8' }, function (err) {
         expect(err, 'to be null');
@@ -292,6 +298,8 @@ describe('In a mounted filesystem', function () {
 
       it('should not have a cache hit on first read', function (done) {
         var self = this;
+
+        this.fusile.cache = {};
 
         fs.readFile(path.join(mnt, 'stylus/cache.styl'), { encoding: 'utf-8' }, function (err) {
           expect(err, 'to be null');
@@ -335,6 +343,8 @@ describe('In a mounted filesystem', function () {
 
       it('should not have a cache hit on first read', function (done) {
         var self = this;
+
+        this.fusile.cache = {};
 
         fs.readFile(path.join(mnt, 'scss/cache.scss'), { encoding: 'utf-8' }, function (err) {
           expect(err, 'to be null');
@@ -396,6 +406,8 @@ describe('In a mounted filesystem', function () {
 
       it('should not have a cache hit on first read', function (done) {
         var self = this;
+
+        this.fusile.cache = {};
 
         fs.readFile(path.join(mnt, 'less/cache.less'), { encoding: 'utf-8' }, function (err) {
           expect(err, 'to be null');

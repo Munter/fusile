@@ -30,7 +30,7 @@
   "dependencies": {
     "accord": "^0.16.0",
     "errno": "^0.1.1",
-    "fuse4js": "^0.1.10",
+    "fuse-bindings": "^2.1.2",
     "gaze": "^0.5.1",
     "lodash": "^3.2.0",
     "minimatch": "^2.0.1",

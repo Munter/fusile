@@ -1,7 +1,7 @@
 'use strict';
 
 var fusile = require('../lib/');
-var unmount = require('../lib/unmount');
+var fuse = require('fuse-bindings');
 var fs = require('fs');
 var path = require('path');
 var mkdirp = require('mkdirp');
@@ -15,7 +15,7 @@ var mnt = 'test/AUTOPREFIXER';
 
 describe('Autoprefixer', function () {
   before(function (done) {
-    unmount(mnt, function () {
+    fuse.unmount(mnt, function () {
       mkdirp(mnt, function (err) {
         if (err) {
           console.error(err);
@@ -33,7 +33,7 @@ describe('Autoprefixer', function () {
 
   after(function (done) {
     setTimeout(function () {
-      unmount(mnt, function () {
+      fuse.unmount(mnt, function () {
         rimraf(mnt, done);
       });
     }, 500);

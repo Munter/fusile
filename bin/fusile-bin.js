@@ -3,6 +3,8 @@
 
 var argv = require('minimist')(process.argv.slice(2));
 var path = require('path');
+var rimraf = require('rimraf');
+var fuse = require('fuse-bindings');
 var fusile = require('../lib/index');
 var mkdirp = require('mkdirp');
 
@@ -17,10 +19,23 @@ var mountPoint = path.resolve(process.cwd(), argv._[1]);
 var watches = [].concat(argv.watch || [], argv.w || []);
 
 mkdirp(mountPoint, function () {
-  fusile(sourceDir, mountPoint, {
+  var instance = fusile(sourceDir, mountPoint, {
     watches: watches,
     verbose: argv.v
   });
+
+  var kill = function () {
+    process.removeListener('SIGINT', kill);
+    process.removeListener('SIGTERM', kill);
+
+    fuse.unmount(mountPoint, function () {
+      rimraf(mountPoint, function () {
+        console.error('\nUnmounted: ' + mountPoint);
+
+        process.exit(0);
+      });
+    });
+  };
 
   // Start reading from stdin
   process.stdin.resume();
@@ -29,11 +44,7 @@ mkdirp(mountPoint, function () {
   console.log('Watching patterns: ' + watches);
   console.log('To stop it, press Ctrl+C');
 
-  process.on('SIGINT', function () {
-    require('../lib/unmount')(mountPoint, function () {
-      console.error('\nUnmounted: ' + mountPoint);
-
-      process.exit(0);
-    });
-  });
+  process.on('SIGINT', kill);
+  process.on('SIGTERM', kill);
+  instance.on('destroy', kill);
 });
