@@ -11,8 +11,6 @@ var async = require('async');
 var expect = require('unexpected').clone();
 expect.installPlugin(require('unexpected-sinon'));
 
-var sinon = require('sinon');
-
 var src = 'fixtures/source';
 var compiled = 'fixtures/compiled';
 var mnt = 'test/SOURCEMAPS';
