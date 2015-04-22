@@ -38,7 +38,7 @@ describe('Sourcemap', function () {
         }
 
         self.fusile = fusile(src, mnt, {
-          verbose: true,
+          // verbose: true,
           accord: {
             sourcemap: true
           }
@@ -206,9 +206,6 @@ describe('Sourcemap', function () {
         fs.readFile.bind(undefined, expected, 'utf-8')
       ], function (err, results) {
         expect(err, 'to be undefined');
-
-console.log(results[0]);
-
         expect(results[0], 'to be', results[1]);
 
         done();
