@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 
+process.env.UV_THREADPOOL_SIZE = 64;
+
 var argv = require('minimist')(process.argv.slice(2));
 var path = require('path');
 var rimraf = require('rimraf');
