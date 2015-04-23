@@ -27,8 +27,10 @@ mkdirp(mountPoint, function () {
   });
 
   var kill = function () {
-    process.removeListener('SIGINT', kill);
-    process.removeListener('SIGTERM', kill);
+    try {
+      process.removeListener('SIGINT', kill);
+      process.removeListener('SIGTERM', kill);
+    } catch(e) {}
 
     fuse.unmount(mountPoint, function () {
       rimraf(mountPoint, function () {
