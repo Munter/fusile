@@ -45,7 +45,9 @@ mkdirp(mountPoint, function () {
   process.stdin.resume();
 
   console.log('File system started at ' + mountPoint);
-  console.log('Watching patterns: ' + watches);
+  if (watches.length) {
+    console.log('Watching patterns: ' + watches);
+  }
   console.log('To stop it, press Ctrl+C');
 
   process.on('SIGINT', kill);
