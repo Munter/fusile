@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
+var fuse = require('fuse-bindings');
 var fusile = require('./lib');
 var mkdirp = require('mkdirp');
 
@@ -45,7 +46,7 @@ fusile('fixtures/source', testTarget, {
 process.stdin.resume();
 
 process.on('SIGINT', function () {
-  require('./lib/unmount')(testTarget, function () {
+  fuse.unmount(testTarget, function () {
     console.error('Unmounted: ' + testTarget);
 
     process.exit(0);
