@@ -1,8 +1,37 @@
 # fusile
-
 A web asset precompiling file system proxy.
 
 Mounts a fuse file system on a target directory, auto loads available compilers, compiles assets on request, caches compiled assets if source file is unmodified, watches original file for changes on demand.
+
+Turn your setup of custom configured transpiler plugins for all your different tools from this:
+
+```
++---------------+
+| Source.es6.js |  -+--> Transpiler --> Module loader --> Browser
++---------------+   |
+                    +--> Watcher --> Transpiler --> Livereload
+                    |
+                    +--> Transpiler --> Linter
+                    |
+                    +--> Transpiler --> Test runner
+                    |
+                    +--> Transpiler --> Build system
+```
+
+into this:
+
+```
++---------------+      +--------------------------+
+| Source.es6.js |  --> | Source.transpiled.es6.js | -+--> Module loader --> Browser
++---------------+      +--------------------------+  |
+                                                     +--> Watcher --> Livereload
+                                                     |
+                                                     +--> Linter
+                                                     |
+                                                     +--> Test runner
+                                                     |
+                                                     +--> Build system
+```
 
 ## Installation
 
