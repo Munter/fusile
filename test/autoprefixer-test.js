@@ -23,7 +23,8 @@ describe('Autoprefixer', function () {
         }
 
         fusile(src, mnt, {
-          browsers: ['last 500 versions']
+          browsers: ['last 500 versions'],
+          accord: {}
         });
 
         setTimeout(done, 300);

@@ -28,7 +28,8 @@ describe('In a mounted filesystem', function () {
         }
 
         self.fusile = fusile(src, mnt, {
-          // verbose: true
+          // verbose: true,
+          accord: {}
         });
 
         setTimeout(done, 300);
