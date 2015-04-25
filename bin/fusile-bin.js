@@ -23,7 +23,8 @@ var watches = [].concat(argv.watch || [], argv.w || []);
 mkdirp(mountPoint, function () {
   var instance = fusile(sourceDir, mountPoint, {
     watches: watches,
-    verbose: argv.v
+    verbose: argv.v,
+    browsers: ['last 2 versions']
   });
 
   var kill = function () {
