@@ -27,6 +27,8 @@ mkdirp(mountPoint, function () {
     browsers: ['last 2 versions']
   });
 
+  instance.on('error', console.error.bind(console));
+
   var kill = function () {
     try {
       process.removeListener('SIGINT', kill);
