@@ -54,9 +54,9 @@ When any of the above precompilers are available in the context of fusile (in yo
 
 Status: pre-alpha prototype. Use at own risk
 
-## Features
+## Roadmap
 
-**v1.x**
+**[v1.x](https://github.com/Munter/fusile/issues?q=is%3Aopen+is%3Aissue+milestone%3Av1.x)**
 
  - [x] Autoload installed transpilers
  - [x] Asset compiling on demand
@@ -66,7 +66,7 @@ Status: pre-alpha prototype. Use at own risk
  - [ ] Sourcemaps
  - [ ] Compiled file extension rewriting to target extension
 
-**v2.x**
+**[v2.x](https://github.com/Munter/fusile/issues?q=is%3Aopen+is%3Aissue+milestone%3Av2.x)**
  - [ ] Expose a compile lifecycle callback to let people hook in their own pipeline
  - [ ] Isolate Accord transpiler autoloading into separate module
  - [ ] Configuration: Options for individual transpiler
