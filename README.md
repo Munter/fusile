@@ -62,12 +62,17 @@ Status: pre-alpha prototype. Use at own risk
  - [x] Asset compiling on demand
  - [x] Intelligent caching of compiled assets
  - [x] File watcher based cache busting (optional)
- - [x] Sourcemaps
  - [x] Autoprefixer
+ - [ ] Sourcemaps
+ - [ ] Compiled file extension rewriting to target extension
 
 **v2.x**
+ - [ ] Expose a compile lifecycle callback to let people hook in their own pipeline
+ - [ ] Isolate Accord transpiler autoloading into separate module
+ - [ ] Configuration: Options for individual transpiler
+ - [ ] Configuration: File extension / glob pattern to transpiler mapping
+ - [ ] Detect compiled dir file watcher init events and proxy them through to source dir
 
-**v3.x**
 
 ## File watching
 
