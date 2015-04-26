@@ -73,6 +73,11 @@ Status: pre-alpha prototype. Use at own risk
  - [ ] Configuration: File extension / glob pattern to transpiler mapping
  - [ ] Detect compiled dir file watcher init events and proxy them through to source dir
 
+**[v3.x](https://github.com/Munter/fusile/issues?q=is%3Aopen+is%3Aissue+milestone%3Av3.x)**
+ - [ ] Refactoring and documentation
+ - [ ] Stability research and improvements
+ - [ ] Performance research and improvements
+
 
 ## File watching
 
