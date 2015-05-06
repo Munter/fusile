@@ -27,7 +27,10 @@ mkdirp(mountPoint, function () {
     browsers: ['last 2 versions']
   });
 
-  instance.on('error', console.error.bind(console));
+  instance.on('error', function (err) {
+    console.error(err.message);
+    console.error('\tat', [err.file, err.line, err.column].join(':'));
+  });
 
   var kill = function () {
     try {
