@@ -24,7 +24,7 @@ var kill = function () {
   });
 };
 
-describe('Sourcemap', function () {
+describe.skip('Sourcemap', function () {
   before(function (done) {
     var self = this;
 
