@@ -27,6 +27,20 @@ mkdirp(mountPoint, function () {
     browsers: ['last 2 versions']
   });
 
+  instance.on('adaptersLoaded', function (adapters) {
+    console.log('Transpilers loaded: ', adapters.map(function (adapter) {
+      return adapter.engineName;
+    }).join(', '));
+  });
+
+  instance.on('mount', function () {
+    console.log('File system started at ' + mountPoint);
+    if (watches.length) {
+      console.log('Watching patterns: ' + watches);
+    }
+    console.log('To stop it, press Ctrl+C');
+  });
+
   instance.on('error', function (err) {
     console.error(err.message);
     console.error('\tat', [err.file, err.line, err.column].join(':'));
@@ -50,11 +64,6 @@ mkdirp(mountPoint, function () {
   // Start reading from stdin
   process.stdin.resume();
 
-  console.log('File system started at ' + mountPoint);
-  if (watches.length) {
-    console.log('Watching patterns: ' + watches);
-  }
-  console.log('To stop it, press Ctrl+C');
 
   process.on('SIGINT', kill);
   process.on('SIGTERM', kill);
