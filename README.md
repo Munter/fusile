@@ -49,6 +49,8 @@ Fusile is a compiling file system proxy. In order to get it to compile your asse
 
 When any of the above precompilers are available in the context of fusile (in your project root or globally installed), fusile will automatically load it and start compiling files with the corresponding file extension when you read the files from the mountpoint.
 
+Once you've mounted the new transpiled source directory, point your browser, web server, linter, test runner directly at the files in it, and you are ready to go.
+
 
 ## Project status
 
