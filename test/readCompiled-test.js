@@ -37,7 +37,7 @@ describe('readCompiled', function () {
 
   it('should autoprefix compiled CSS output', function () {
     return readCompiled(getPath('scss/autoprefix.scss')).then(function (result) {
-      return expect(result, 'to be', 'body {\n  -webkit-transform: rotate(-1deg);\n          transform: rotate(-1deg); }\n');
+      return expect(result, 'to be', 'body {\n  -webkit-transform: rotate(-1deg);\n          transform: rotate(-1deg); }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL211bnRlci9naXQvZnVzaWxlL2ZpeHR1cmVzL3NvdXJjZS9zY3NzL2F1dG9wcmVmaXguc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQTtFQUNFLGtDQUFXO1VBQVgsMEJBQVcsRUFBQSIsImZpbGUiOiJ0by5jc3MifQ== */');
     });
   });
 });
