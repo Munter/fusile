@@ -16,11 +16,25 @@ describe('readCompiled', function () {
   });
 
   it('should throw when reading a file that does not exist', function () {
-    return expect(readCompiled(getPath('does-not-exist.txt')), 'to be rejected with', 'ENOENT, open \'/home/munter/git/fusile/fixtures/source/does-not-exist.txt\'');
+    return expect(readCompiled(getPath('does-not-exist.txt')), 'when rejected', 'to exhaustively satisfy', {
+      code: 'ENOENT',
+      errno: 34,
+      path: /fixtures\/source\/does-not-exist\.txt$/,
+      message: /^ENOENT, open '.+?fixtures\/source\/does-not-exist\.txt'$/
+    });
   });
 
   it('should compile a file if there is an adapter', function () {
     return expect(readCompiled(getPath('babel/simplest.jsx')), 'to be resolved with', '"use strict";\n\nvar foo = "bar";\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL211bnRlci9naXQvZnVzaWxlL2ZpeHR1cmVzL3NvdXJjZS9iYWJlbC9zaW1wbGVzdC5qc3giXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxJQUFNLEdBQUcsR0FBRyxLQUFLLENBQUMiLCJmaWxlIjoiL2hvbWUvbXVudGVyL2dpdC9mdXNpbGUvZml4dHVyZXMvc291cmNlL2JhYmVsL3NpbXBsZXN0LmpzeCJ9\n');
+  });
+
+  it('should throw when compiling a file that does not exist', function () {
+    return expect(readCompiled(getPath('does-not-exist.scss')), 'when rejected', 'to exhaustively satisfy', {
+      code: 'ENOENT',
+      errno: 34,
+      path: /fixtures\/source\/does-not-exist\.scss$/,
+      message: /^ENOENT, open '.+?fixtures\/source\/does-not-exist\.scss'$/
+    });
   });
 
   it('should autoprefix uncompiled CSS output', function () {
