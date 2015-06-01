@@ -37,6 +37,17 @@ describe('readCompiled', function () {
     });
   });
 
+  it('should throw when compiling a file with syntax errors', function () {
+    return expect(readCompiled(getPath('scss/syntaxerror.scss')), 'when rejected', 'to exhaustively satisfy', {
+      status: 1,
+      file: /fixtures\/source\/scss\/syntaxerror\.scss$/,
+      line: 2,
+      column: 3,
+      message: 'property "color" must be followed by a \':\'',
+      code: 1
+    });
+  });
+
   it('should autoprefix uncompiled CSS output', function () {
     return expect(readCompiled(getPath('basic.css')), 'to be resolved with', 'body {\n  -webkit-transform: rotate(-1deg);\n          transform: rotate(-1deg);\n}\n');
   });
