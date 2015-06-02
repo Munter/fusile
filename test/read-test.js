@@ -51,6 +51,7 @@ describe('In a mounted filesystem', function () {
       expect(files, 'to exhaustively satisfy', [
         'autoprefixer',
         'babel',
+        'basic.css',
         'coco',
         'coffee',
         'csso',
