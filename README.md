@@ -65,12 +65,12 @@ Status: pre-alpha prototype. Use at own risk
  - [x] Intelligent caching of compiled assets
  - [x] File watcher based cache busting (optional)
  - [x] Autoprefixer
- - [ ] Sourcemaps
- - [ ] Compiled file extension rewriting to target extension
+ - [x] Sourcemaps
+ - [x] Compiled file extension rewriting to target extension
+ - [x] Isolate Accord transpiler autoloading into separate module
 
 **[v2.x](https://github.com/Munter/fusile/issues?q=is%3Aopen+is%3Aissue+milestone%3Av2.x)**
  - [ ] Expose a compile lifecycle callback to let people hook in their own pipeline
- - [ ] Isolate Accord transpiler autoloading into separate module
  - [ ] Configuration: Options for individual transpiler
  - [ ] Configuration: File extension / glob pattern to transpiler mapping
  - [ ] Detect compiled dir file watcher init events and proxy them through to source dir
