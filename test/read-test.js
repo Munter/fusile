@@ -8,8 +8,15 @@ var mkdirp = require('mkdirp');
 var rimraf = require('rimraf');
 var async = require('async');
 
-var expect = require('unexpected').clone();
-expect.installPlugin(require('unexpected-sinon'));
+var when = require('when');
+var node = require('when/node');
+
+var whenFs = node.liftAll(fs);
+
+var expect = require('unexpected')
+  .clone()
+  .installPlugin(require('unexpected-promise'))
+  .installPlugin(require('unexpected-sinon'));
 
 var sinon = require('sinon');
 
@@ -45,40 +52,55 @@ describe('In a mounted filesystem', function () {
     }, 500);
   });
 
-  it('should read a directory', function (done) {
-    fs.readdir(mnt, function (err, files) {
-      expect(err, 'to be null');
-      expect(files, 'to exhaustively satisfy', [
-        'autoprefixer',
-        'babel',
-        'basic.css',
-        'coco',
-        'coffee',
-        'csso',
-        'dogescript',
-        'ejs',
-        'escape-html',
-        'haml',
-        'handlebars',
-        'jade',
-        'less',
-        'livescript',
-        'marc',
-        'markdown',
-        'minify-css',
-        'minify-html',
-        'minify-js',
-        'mustache',
-        'myth',
-        'scss',
-        'stylus',
-        'swig',
-        'toffee',
-        'unchanged.txt'
-      ]);
+  it('should read a directory', function () {
+    return expect(whenFs.readdir(mnt), 'to be resolved with', [
+      'autoprefixer',
+      'babel',
+      'basic.css',
+      'coco',
+      'coffee',
+      'csso',
+      'dogescript',
+      'ejs',
+      'escape-html',
+      'extensions',
+      'haml',
+      'handlebars',
+      'jade',
+      'less',
+      'livescript',
+      'marc',
+      'markdown',
+      'minify-css',
+      'minify-html',
+      'minify-js',
+      'mustache',
+      'myth',
+      'scss',
+      'stylus',
+      'swig',
+      'toffee',
+      'unchanged.txt'
+    ]);
+  });
 
-      done();
-    });
+  it('should translate extensions when reading a directory', function () {
+    return expect(whenFs.readdir(mnt + '/extensions'), 'to be resolved with', [
+      'babel.js',
+      'coco.js',
+      'coffee.js',
+      'dogescript.js',
+      'less.css',
+      'livescript.js',
+      'markdown.html',
+      'mcss.css',
+      'md.html',
+      'mdown.html',
+      'myth.css',
+      'scss.css',
+      'stylus.css',
+      'swig.html'
+    ]);
   });
 
   it('should verify the existance of a file', function (done) {
