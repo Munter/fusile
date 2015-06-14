@@ -8,7 +8,7 @@ var mkdirp = require('mkdirp');
 var rimraf = require('rimraf');
 var async = require('async');
 
-// var when = require('when');
+var when = require('when');
 var node = require('when/node');
 
 var whenFs = node.liftAll(fs);
@@ -17,6 +17,16 @@ var expect = require('unexpected')
   .clone()
   .installPlugin(require('unexpected-promise'))
   .installPlugin(require('unexpected-sinon'));
+
+expect.addAssertion('string', 'to have file content', function (expect, subject, cmp) {
+  return when.all([
+    whenFs.readFile(subject, 'utf8'),
+    whenFs.readFile(cmp, 'utf8')
+  ]).then(function (results) {
+    return expect(results[0], 'to equal', results[1]);
+  });
+});
+
 
 var sinon = require('sinon');
 
@@ -122,170 +132,94 @@ describe('In a mounted filesystem', function () {
   });
 
   describe('when reading uncompiled files', function () {
-    it('should compile babel/basic.jsx', function (done) {
-      var actual = path.join(mnt, 'babel/basic.jsx');
-      var expected = path.join(compiled, 'babel/basic.js');
+    describe('using the source file extension', function () {
 
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
+      it('should not compile babel/basic.jsx', function () {
+        return expect(path.join(mnt, 'babel/basic.jsx'), 'to have file content', path.join(src, 'babel/basic.jsx'));
       });
+
+      it('should not compile coco/basic.co', function () {
+        return expect(path.join(mnt, 'coco/basic.co'), 'to have file content', path.join(src, 'coco/basic.co'));
+      });
+
+      it('should not compile coffee/basic.coffee', function () {
+        return expect(path.join(mnt, 'coffee/basic.coffee'), 'to have file content', path.join(src, 'coffee/basic.coffee'));
+      });
+
+      it('should not compile dogescript/basic.djs', function () {
+        return expect(path.join(mnt, 'dogescript/basic.djs'), 'to have file content', path.join(src, 'dogescript/basic.djs'));
+      });
+
+      it('should not compile less/basic.less', function () {
+        return expect(path.join(mnt, 'less/basic.less'), 'to have file content', path.join(src, 'less/basic.less'));
+      });
+
+      it('should not compile livescript/basic.ls', function () {
+        return expect(path.join(mnt, 'livescript/basic.ls'), 'to have file content', path.join(src, 'livescript/basic.ls'));
+      });
+
+      it('should not compile markdown/basic.md', function () {
+        return expect(path.join(mnt, 'markdown/basic.md'), 'to have file content', path.join(src, 'markdown/basic.md'));
+      });
+
+      it('should not compile myth/basic.myth', function () {
+        return expect(path.join(mnt, 'myth/basic.myth'), 'to have file content', path.join(src, 'myth/basic.myth'));
+      });
+
+      it('should not compile scss/basic.scss', function () {
+        return expect(path.join(mnt, 'scss/basic.scss'), 'to have file content', path.join(src, 'scss/basic.scss'));
+      });
+
+      it('should not compile stylus/basic.styl', function () {
+        return expect(path.join(mnt, 'stylus/basic.styl'), 'to have file content', path.join(src, 'stylus/basic.styl'));
+      });
+
     });
 
-    it('should compile coco/basic.co', function (done) {
-      var actual = path.join(mnt, 'coco/basic.co');
-      var expected = path.join(compiled, 'coco/basic.js');
+    describe('using the target file extension', function () {
 
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
+      it('should compile babel/basic.jsx', function () {
+        return expect(path.join(mnt, 'babel/basic.js'), 'to have file content', path.join(compiled, 'babel/basic.js'));
       });
+
+      it('should compile coco/basic.co', function () {
+        return expect(path.join(mnt, 'coco/basic.js'), 'to have file content', path.join(compiled, 'coco/basic.js'));
+      });
+
+      it('should compile coffee/basic.coffee', function () {
+        return expect(path.join(mnt, 'coffee/basic.js'), 'to have file content', path.join(compiled, 'coffee/basic.js'));
+      });
+
+      it('should compile dogescript/basic.djs', function () {
+        return expect(path.join(mnt, 'dogescript/basic.js'), 'to have file content', path.join(compiled, 'dogescript/basic.js'));
+      });
+
+      it('should compile less/basic.less', function () {
+        return expect(path.join(mnt, 'less/basic.css'), 'to have file content', path.join(compiled, 'less/basic.css'));
+      });
+
+      it('should compile livescript/basic.ls', function () {
+        return expect(path.join(mnt, 'livescript/basic.js'), 'to have file content', path.join(compiled, 'livescript/basic.js'));
+      });
+
+      it('should compile markdown/basic.md', function () {
+        return expect(path.join(mnt, 'markdown/basic.html'), 'to have file content', path.join(compiled, 'markdown/basic.html'));
+      });
+
+      it('should compile myth/basic.myth', function () {
+        return expect(path.join(mnt, 'myth/basic.css'), 'to have file content', path.join(compiled, 'myth/basic.css'));
+      });
+
+      it('should compile scss/basic.scss', function () {
+        return expect(path.join(mnt, 'scss/basic.css'), 'to have file content', path.join(compiled, 'scss/basic.css'));
+      });
+
+      it('should compile stylus/basic.styl', function () {
+        return expect(path.join(mnt, 'stylus/basic.css'), 'to have file content', path.join(compiled, 'stylus/basic.css'));
+      });
+
     });
 
-    it('should compile coffee/basic.coffee', function (done) {
-      var actual = path.join(mnt, 'coffee/basic.coffee');
-      var expected = path.join(compiled, 'coffee/basic.js');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
-      });
-    });
-
-    it('should compile dogescript/basic.djs', function (done) {
-      var actual = path.join(mnt, 'dogescript/basic.djs');
-      var expected = path.join(compiled, 'dogescript/basic.js');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
-      });
-    });
-
-    it('should compile escape-html/basic.html', function (done) {
-      var actual = path.join(mnt, 'escape-html/basic.html');
-      var expected = path.join(compiled, 'escape-html/basic.html');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
-      });
-    });
-
-    it('should compile less/basic.less', function (done) {
-      var actual = path.join(mnt, 'less/basic.less');
-      var expected = path.join(compiled, 'less/basic.css');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
-      });
-    });
-
-    it('should compile livescript/basic.ls', function (done) {
-      var actual = path.join(mnt, 'livescript/basic.ls');
-      var expected = path.join(compiled, 'livescript/basic.js');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
-      });
-    });
-
-    it('should compile markdown/basic.md', function (done) {
-      var actual = path.join(mnt, 'markdown/basic.md');
-      var expected = path.join(compiled, 'markdown/basic.html');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
-      });
-    });
-
-    it('should compile myth/basic.myth', function (done) {
-      var actual = path.join(mnt, 'myth/basic.myth');
-      var expected = path.join(compiled, 'myth/basic.css');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1].replace(/\n$/, ''));
-
-        done();
-      });
-    });
-
-    it('should compile scss/basic.scss', function (done) {
-      var actual = path.join(mnt, 'scss/basic.scss');
-      var expected = path.join(compiled, 'scss/basic.css');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
-      });
-    });
-
-    it('should compile stylus/basic.styl', function (done) {
-      var actual = path.join(mnt, 'stylus/basic.styl');
-      var expected = path.join(compiled, 'stylus/basic.css');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
-      });
-    });
   });
 
   describe('when caching', function () {
