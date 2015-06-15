@@ -6,7 +6,6 @@ var fs = require('fs');
 var path = require('path');
 var mkdirp = require('mkdirp');
 var rimraf = require('rimraf');
-var async = require('async');
 var when = require('when');
 var whenFs = require('when/node').liftAll(fs);
 
