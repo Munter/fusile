@@ -56,22 +56,22 @@ describe('Autoprefixer', function () {
   });
 
   it('should prefix autoprefixer/unprefixed.css', function () {
-    return expect(path.join(mnt, 'autoprefixer/unprefixed.css'), 'to have file content', path.join(compiled, 'autoprefixer/unprefixed.css'));
+    return expect(path.join(mnt, 'autoprefixer/unprefixed-css.css'), 'to have file content', path.join(compiled, 'autoprefixer/unprefixed-css.css'));
   });
 
   it('should prefix autoprefixer/unprefixed.scss', function () {
-    return expect(path.join(mnt, 'autoprefixer/unprefixed.scss'), 'to have file content', path.join(compiled, 'autoprefixer/unprefixed.scss'));
+    return expect(path.join(mnt, 'autoprefixer/unprefixed-scss.css'), 'to have file content', path.join(compiled, 'autoprefixer/unprefixed-scss.css'));
   });
 
   it('should prefix autoprefixer/unprefixed.less', function () {
-    return expect(path.join(mnt, 'autoprefixer/unprefixed.less'), 'to have file content', path.join(compiled, 'autoprefixer/unprefixed.less'));
+    return expect(path.join(mnt, 'autoprefixer/unprefixed-less.css'), 'to have file content', path.join(compiled, 'autoprefixer/unprefixed-less.css'));
   });
 
   it('should prefix autoprefixer/unprefixed.myth', function () {
-    return expect(path.join(mnt, 'autoprefixer/unprefixed.myth'), 'to have file content', path.join(compiled, 'autoprefixer/unprefixed.myth'));
+    return expect(path.join(mnt, 'autoprefixer/unprefixed-myth.css'), 'to have file content', path.join(compiled, 'autoprefixer/unprefixed-myth.css'));
   });
 
   it('should prefix autoprefixer/unprefixed.styl', function () {
-    return expect(path.join(mnt, 'autoprefixer/unprefixed.styl'), 'to have file content', path.join(compiled, 'autoprefixer/unprefixed.styl'));
+    return expect(path.join(mnt, 'autoprefixer/unprefixed-styl.css'), 'to have file content', path.join(compiled, 'autoprefixer/unprefixed-styl.css'));
   });
 });
