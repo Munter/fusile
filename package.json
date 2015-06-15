@@ -30,7 +30,7 @@
   "dependencies": {
     "accord": "^0.18.0",
     "errno": "^0.1.1",
-    "fuse-bindings": "^2.1.2",
+    "fuse-bindings": "^2.4.3",
     "gaze": "^0.5.1",
     "inline-source-map": "^0.5.0",
     "inline-source-map-comment": "^1.0.5",
