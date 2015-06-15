@@ -38,7 +38,7 @@ describe('Autoprefixer', function () {
 
         fusile(src, mnt, {
           browsers: ['last 500 versions'],
-          accord: {}
+          sourceMap: false
         });
 
         setTimeout(done, 300);
