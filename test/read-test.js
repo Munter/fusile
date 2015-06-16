@@ -258,9 +258,10 @@ describe('In a mounted filesystem', function () {
 
         this.fusile.cache = {};
 
-        fs.readFile(path.join(mnt, 'stylus/cache.styl'), { encoding: 'utf-8' }, function (err) {
+        fs.readFile(path.join(mnt, 'stylus/cache.css'), { encoding: 'utf-8' }, function (err) {
           expect(err, 'to be null');
-          expect(self.emitSpy, 'was not called');
+          expect(self.emitSpy, 'was called once');
+          expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/stylus/cache.css');
 
           done();
         });
@@ -269,10 +270,10 @@ describe('In a mounted filesystem', function () {
       it('should have a cache hit on second read', function (done) {
         var self = this;
 
-        fs.readFile(path.join(mnt, 'stylus/cache.styl'), { encoding: 'utf-8' }, function (err) {
+        fs.readFile(path.join(mnt, 'stylus/cache.css'), { encoding: 'utf-8' }, function (err) {
           expect(err, 'to be null');
           expect(self.emitSpy, 'was called once');
-          expect(self.emitSpy, 'was called with exactly', 'info', 'cache hit', '/stylus/cache.styl');
+          expect(self.emitSpy, 'was always called with exactly', 'info', 'cache hit', '/stylus/cache.css');
 
           done();
         });
@@ -283,13 +284,15 @@ describe('In a mounted filesystem', function () {
 
         setTimeout(function () {
           fs.utimes(path.join(src, 'stylus/cache.styl'), new Date(), new Date(), function () {
-            fs.readFile(path.join(mnt, 'stylus/cache.styl'), { encoding: 'utf-8' }, function (err) {
+
+            fs.readFile(path.join(mnt, 'stylus/cache.css'), { encoding: 'utf-8' }, function (err) {
               expect(err, 'to be null');
               expect(self.emitSpy, 'was called once');
-              expect(self.emitSpy, 'was called with exactly', 'info', 'cache miss', '/stylus/cache.styl');
+              expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/stylus/cache.css');
 
               done();
             });
+
           });
         }, 1000);
       });
