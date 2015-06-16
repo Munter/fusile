@@ -236,7 +236,7 @@ describe('In a mounted filesystem', function () {
     it('should not have a cache hit on first read of non-compiled file', function (done) {
       var self = this;
 
-      this.fusile.cache = {};
+      this.fusile.tolkCache = {};
 
       fs.readFile(path.join(mnt, '/unchanged.txt'), { encoding: 'utf-8' }, function (err) {
         expect(err, 'to be null');
@@ -254,9 +254,8 @@ describe('In a mounted filesystem', function () {
     describe('compiled file with no partials, stylus/cache.styl', function () {
 
       it('should not have a cache hit on first read', function (done) {
+        this.fusile.tolkCache = {};
         var self = this;
-
-        this.fusile.cache = {};
 
         fs.readFile(path.join(mnt, 'stylus/cache.css'), { encoding: 'utf-8' }, function (err) {
           expect(err, 'to be null');
@@ -294,7 +293,7 @@ describe('In a mounted filesystem', function () {
             });
 
           });
-        }, 1000);
+        }, 1800);
       });
 
     });
@@ -304,7 +303,7 @@ describe('In a mounted filesystem', function () {
       it('should not have a cache hit on first read', function (done) {
         var self = this;
 
-        this.fusile.cache = {};
+        this.fusile.tolkCache = {};
 
         fs.readFile(path.join(mnt, 'scss/cache.css'), { encoding: 'utf-8' }, function (err) {
           expect(err, 'to be null');
@@ -364,7 +363,7 @@ describe('In a mounted filesystem', function () {
       it('should not have a cache hit on first read', function (done) {
         var self = this;
 
-        this.fusile.cache = {};
+        this.fusile.tolkCache = {};
 
         fs.readFile(path.join(mnt, 'less/cache.css'), { encoding: 'utf-8' }, function (err) {
           expect(err, 'to be null');
