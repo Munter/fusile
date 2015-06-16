@@ -306,9 +306,9 @@ describe('In a mounted filesystem', function () {
 
         this.fusile.cache = {};
 
-        fs.readFile(path.join(mnt, 'scss/cache.scss'), { encoding: 'utf-8' }, function (err) {
+        fs.readFile(path.join(mnt, 'scss/cache.css'), { encoding: 'utf-8' }, function (err) {
           expect(err, 'to be null');
-          expect(self.emitSpy, 'was not called');
+          expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/scss/cache.css');
 
           done();
         });
@@ -317,11 +317,9 @@ describe('In a mounted filesystem', function () {
       it('should have a cache hit on second read', function (done) {
         var self = this;
 
-        fs.readFile(path.join(mnt, 'scss/cache.scss'), { encoding: 'utf-8' }, function (err) {
+        fs.readFile(path.join(mnt, 'scss/cache.css'), { encoding: 'utf-8' }, function (err) {
           expect(err, 'to be null');
-
-          expect(self.emitSpy, 'was called');
-          expect(self.emitSpy, 'was called with', 'info', 'cache hit', '/scss/cache.scss');
+          expect(self.emitSpy, 'was always called with exactly', 'info', 'cache hit', '/scss/cache.css');
 
           done();
         });
@@ -332,10 +330,9 @@ describe('In a mounted filesystem', function () {
 
         setTimeout(function () {
           fs.utimes(path.join(src, 'scss/cache.scss'), new Date(), new Date(), function () {
-              fs.readFile(path.join(mnt, 'scss/cache.scss'), { encoding: 'utf-8' }, function (err) {
+              fs.readFile(path.join(mnt, 'scss/cache.css'), { encoding: 'utf-8' }, function (err) {
                 expect(err, 'to be null');
-                expect(self.emitSpy, 'was called once');
-                expect(self.emitSpy, 'was called with exactly', 'info', 'cache miss', '/scss/cache.scss');
+                expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/scss/cache.css');
 
                 done();
               });
@@ -349,13 +346,13 @@ describe('In a mounted filesystem', function () {
 
         setTimeout(function () {
           fs.utimes(path.join(src, 'scss/_cache_partial.scss'), new Date(), new Date(), function () {
-              fs.readFile(path.join(mnt, 'scss/cache.scss'), { encoding: 'utf-8' }, function (err) {
-                expect(err, 'to be null');
-                expect(self.emitSpy, 'was called once');
-                expect(self.emitSpy, 'was called with exactly', 'info', 'cache miss', '/scss/cache.scss');
+            fs.readFile(path.join(mnt, 'scss/cache.css'), { encoding: 'utf-8' }, function (err) {
+              expect(err, 'to be null');
+              expect(self.emitSpy, 'was called once');
+              expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/scss/cache.css');
 
-                done();
-              });
+              done();
+            });
           });
         }, 1000);
       });
@@ -369,9 +366,9 @@ describe('In a mounted filesystem', function () {
 
         this.fusile.cache = {};
 
-        fs.readFile(path.join(mnt, 'less/cache.less'), { encoding: 'utf-8' }, function (err) {
+        fs.readFile(path.join(mnt, 'less/cache.css'), { encoding: 'utf-8' }, function (err) {
           expect(err, 'to be null');
-          expect(self.emitSpy, 'was not called');
+          expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/less/cache.css');
 
           done();
         });
@@ -380,11 +377,11 @@ describe('In a mounted filesystem', function () {
       it('should have a cache hit on second read', function (done) {
         var self = this;
 
-        fs.readFile(path.join(mnt, 'less/cache.less'), { encoding: 'utf-8' }, function (err) {
+        fs.readFile(path.join(mnt, 'less/cache.css'), { encoding: 'utf-8' }, function (err) {
           expect(err, 'to be null');
 
           expect(self.emitSpy, 'was called');
-          expect(self.emitSpy, 'was called with', 'info', 'cache hit', '/less/cache.less');
+          expect(self.emitSpy, 'was always called with exactly', 'info', 'cache hit', '/less/cache.css');
 
           done();
         });
@@ -395,13 +392,12 @@ describe('In a mounted filesystem', function () {
 
         setTimeout(function () {
           fs.utimes(path.join(src, 'less/cache.less'), new Date(), new Date(), function () {
-              fs.readFile(path.join(mnt, 'less/cache.less'), { encoding: 'utf-8' }, function (err) {
-                expect(err, 'to be null');
-                expect(self.emitSpy, 'was called once');
-                expect(self.emitSpy, 'was called with exactly', 'info', 'cache miss', '/less/cache.less');
+            fs.readFile(path.join(mnt, 'less/cache.css'), { encoding: 'utf-8' }, function (err) {
+              expect(err, 'to be null');
+              expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/less/cache.css');
 
-                done();
-              });
+              done();
+            });
 
           });
         }, 1000);
@@ -412,13 +408,13 @@ describe('In a mounted filesystem', function () {
 
         setTimeout(function () {
           fs.utimes(path.join(src, 'less/_cache_partial.less'), new Date(), new Date(), function () {
-              fs.readFile(path.join(mnt, 'less/cache.less'), { encoding: 'utf-8' }, function (err) {
-                expect(err, 'to be null');
-                expect(self.emitSpy, 'was called once');
-                expect(self.emitSpy, 'was called with exactly', 'info', 'cache miss', '/less/cache.less');
+            fs.readFile(path.join(mnt, 'less/cache.css'), { encoding: 'utf-8' }, function (err) {
+              expect(err, 'to be null');
+              expect(self.emitSpy, 'was called once');
+              expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/less/cache.css');
 
-                done();
-              });
+              done();
+            });
           });
         }, 1000);
       });
