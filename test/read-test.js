@@ -14,8 +14,7 @@ var whenFs = node.liftAll(fs);
 
 var expect = require('unexpected')
   .clone()
-  .installPlugin(require('unexpected-promise'))
-  .installPlugin(require('unexpected-sinon'));
+  .installPlugin(require('unexpected-promise'));
 
 expect.addAssertion('string', 'to have file content', function (expect, subject, cmp) {
   return when.all([
@@ -25,9 +24,6 @@ expect.addAssertion('string', 'to have file content', function (expect, subject,
     return expect(results[0], 'to equal', results[1]);
   });
 });
-
-
-var sinon = require('sinon');
 
 var src = 'fixtures/source';
 var compiled = 'fixtures/compiled';
