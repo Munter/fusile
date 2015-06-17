@@ -7,11 +7,6 @@ var path = require('path');
 var mkdirp = require('mkdirp');
 var rimraf = require('rimraf');
 
-var when = require('when');
-var node = require('when/node');
-
-var whenFs = node.liftAll(fs);
-
 var expect = require('unexpected')
   .clone()
   .installPlugin(require('unexpected-promise'))
@@ -37,7 +32,7 @@ describe('when caching', function () {
           sourceMap: false
         });
 
-        setTimeout(done, 1000);
+        setTimeout(done, 1800);
       });
     });
   });
@@ -48,10 +43,6 @@ describe('when caching', function () {
         rimraf(mnt, done);
       });
     }, 500);
-  });
-
-  before(function (done) {
-    setTimeout(done, 200);
   });
 
   beforeEach(function () {
@@ -80,19 +71,6 @@ describe('when caching', function () {
   });
 
   describe('compiled file with no partials, stylus/cache.styl', function () {
-    // it('should not have a cache hit on first read', function () {
-
-    //   var spy = sinon.spy(this.fusile, 'emit');
-    //   this.fusile.tolkCache = {};
-
-    //   return whenFs.readFile(path.join(mnt, 'stylus/cache.css')).then(function () {
-    //     return expect(spy, 'was always called with exactly', 'info', 'cache miss', '/stylus/cache.css');
-    //   }).finally(function () {
-    //     spy.restore();
-    //   });
-
-    // });
-
     it('should not have a cache hit on first read', function (done) {
       this.fusile.tolkCache = {};
       var self = this;
