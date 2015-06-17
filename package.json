@@ -28,6 +28,7 @@
   "homepage": "https://github.com/Munter/fusile",
   "bin": "bin/fusile-bin.js",
   "dependencies": {
+    "csserror": "^1.0.1",
     "errno": "^0.1.1",
     "fuse-bindings": "^2.4.3",
     "gaze": "^0.5.1",
