@@ -6,10 +6,25 @@ var fs = require('fs');
 var path = require('path');
 var mkdirp = require('mkdirp');
 var rimraf = require('rimraf');
-var async = require('async');
 
-var expect = require('unexpected').clone();
-expect.installPlugin(require('unexpected-sinon'));
+var when = require('when');
+var node = require('when/node');
+
+var whenFs = node.liftAll(fs);
+
+var expect = require('unexpected')
+  .clone()
+  .installPlugin(require('unexpected-promise'))
+  .installPlugin(require('unexpected-sinon'));
+
+expect.addAssertion('string', 'to have file content', function (expect, subject, cmp) {
+  return when.all([
+    whenFs.readFile(subject, 'utf8'),
+    whenFs.readFile(cmp, 'utf8')
+  ]).then(function (results) {
+    return expect(results[0], 'to equal', results[1]);
+  });
+});
 
 var src = 'fixtures/source';
 var compiled = 'fixtures/compiled';
@@ -36,10 +51,7 @@ describe.skip('Sourcemap', function () {
         }
 
         self.fusile = fusile(src, mnt, {
-          // verbose: true,
-          accord: {
-            sourcemap: true
-          }
+          // verbose: true
         });
 
         self.fusile.on('mount', function () {
@@ -60,169 +72,44 @@ describe.skip('Sourcemap', function () {
   });
 
   describe('when reading uncompiled files', function () {
-    it('should compile babel/basic.jsx', function (done) {
-      var actual = path.join(mnt, 'babel/basic.jsx');
-      var expected = path.join(compiled, 'babel/basic.js');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
-      });
+    it('should compile babel/basic.jsx', function () {
+      return expect(path.join(mnt, 'babel/basic.jsx'), 'to have file content', path.join(compiled, 'babel/basic.js'));
     });
 
-    it('should compile coco/basic.co', function (done) {
-      var actual = path.join(mnt, 'coco/basic.co');
-      var expected = path.join(compiled, 'coco/basic.js');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
-      });
+    it('should compile coco/basic.co', function () {
+      return expect(path.join(mnt, 'coco/basic.co'), 'to have file content', path.join(compiled, 'coco/basic.js'));
     });
 
-    it('should compile coffee/basic.coffee', function (done) {
-      var actual = path.join(mnt, 'coffee/basic.coffee');
-      var expected = path.join(compiled, 'coffee/basic.js');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
-      });
+    it('should compile coffee/basic.coffee', function () {
+      return expect(path.join(mnt, 'coffee/basic.coffee'), 'to have file content', path.join(compiled, 'coffee/basic.js'));
     });
 
-    it('should compile dogescript/basic.djs', function (done) {
-      var actual = path.join(mnt, 'dogescript/basic.djs');
-      var expected = path.join(compiled, 'dogescript/basic.js');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
-      });
+    it('should compile dogescript/basic.djs', function () {
+      return expect(path.join(mnt, 'dogescript/basic.djs'), 'to have file content', path.join(compiled, 'dogescript/basic.js'));
     });
 
-    it('should compile escape-html/basic.html', function (done) {
-      var actual = path.join(mnt, 'escape-html/basic.html');
-      var expected = path.join(compiled, 'escape-html/basic.html');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
-      });
+    it('should compile less/basic.less', function () {
+      return expect(path.join(mnt, 'less/basic.less'), 'to have file content', path.join(compiled, 'less/basic.css'));
     });
 
-    it('should compile less/basic.less', function (done) {
-      var actual = path.join(mnt, 'less/basic.less');
-      var expected = path.join(compiled, 'less/basic.css');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
-      });
+    it('should compile livescript/basic.ls', function () {
+      return expect(path.join(mnt, 'livescript/basic.js'), 'to have file content', path.join(compiled, 'livescript/basic.js'));
     });
 
-    it('should compile livescript/basic.ls', function (done) {
-      var actual = path.join(mnt, 'livescript/basic.ls');
-      var expected = path.join(compiled, 'livescript/basic.js');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
-      });
+    it('should compile markdown/basic.md', function () {
+      return expect(path.join(mnt, 'markdown/basic.md'), 'to have file content', path.join(compiled, 'markdown/basic.html'));
     });
 
-    it('should compile markdown/basic.md', function (done) {
-      var actual = path.join(mnt, 'markdown/basic.md');
-      var expected = path.join(compiled, 'markdown/basic.html');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
-      });
+    it('should compile myth/basic.myth', function () {
+      return expect(path.join(mnt, 'myth/basic.myth'), 'to have file content', path.join(compiled, 'myth/basic.css'));
     });
 
-    it('should compile myth/basic.myth', function (done) {
-      var actual = path.join(mnt, 'myth/basic.myth');
-      var expected = path.join(compiled, 'myth/basic.css');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1].replace(/\n$/, ''));
-
-        done();
-      });
+    it('should compile scss/basic.scss', function () {
+      return expect(path.join(mnt, 'scss/basic.scss'), 'to have file content', path.join(compiled, 'scss/basic.css'));
     });
 
-    it('should compile scss/basic.scss', function (done) {
-      var actual = path.join(mnt, 'scss/basic.scss');
-      var expected = path.join(compiled, 'scss/basic.css');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
-      });
-    });
-
-    it('should compile stylus/basic.styl', function (done) {
-      var actual = path.join(mnt, 'stylus/basic.styl');
-      var expected = path.join(compiled, 'stylus/basic.css');
-
-      async.parallel([
-        fs.readFile.bind(undefined, actual, 'utf-8'),
-        fs.readFile.bind(undefined, expected, 'utf-8')
-      ], function (err, results) {
-        expect(err, 'to be undefined');
-        expect(results[0], 'to be', results[1]);
-
-        done();
-      });
+    it('should compile stylus/basic.styl', function () {
+      return expect(path.join(mnt, 'stylus/basic.styl'), 'to have file content', path.join(compiled, 'stylus/basic.css'));
     });
   });
 });
