@@ -75,13 +75,14 @@ describe('when caching', function () {
       this.fusile.tolkCache = {};
       var self = this;
 
+      setTimeout(function () {
       fs.readFile(path.join(mnt, 'stylus/cache.css'), { encoding: 'utf-8' }, function (err) {
         expect(err, 'to be null');
-        expect(self.emitSpy, 'was called once');
         expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/stylus/cache.css');
 
         done();
       });
+      }, 600);
     });
 
     it('should have a cache hit on second read', function (done) {
@@ -89,7 +90,6 @@ describe('when caching', function () {
 
       fs.readFile(path.join(mnt, 'stylus/cache.css'), { encoding: 'utf-8' }, function (err) {
         expect(err, 'to be null');
-        expect(self.emitSpy, 'was called once');
         expect(self.emitSpy, 'was always called with exactly', 'info', 'cache hit', '/stylus/cache.css');
 
         done();
@@ -104,14 +104,13 @@ describe('when caching', function () {
 
           fs.readFile(path.join(mnt, 'stylus/cache.css'), { encoding: 'utf-8' }, function (err) {
             expect(err, 'to be null');
-            expect(self.emitSpy, 'was called once');
             expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/stylus/cache.css');
 
             done();
           });
 
         });
-      }, 1800);
+      }, 1200);
     });
 
   });
@@ -155,7 +154,7 @@ describe('when caching', function () {
             });
 
         });
-      }, 1000);
+      }, 1200);
     });
 
     it('should have a cache miss on fourth read when partial file was updated', function (done) {
@@ -165,13 +164,12 @@ describe('when caching', function () {
         fs.utimes(path.join(src, 'scss/_cache_partial.scss'), new Date(), new Date(), function () {
           fs.readFile(path.join(mnt, 'scss/cache.css'), { encoding: 'utf-8' }, function (err) {
             expect(err, 'to be null');
-            expect(self.emitSpy, 'was called once');
             expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/scss/cache.css');
 
             done();
           });
         });
-      }, 1000);
+      }, 1200);
     });
 
   });
@@ -196,8 +194,6 @@ describe('when caching', function () {
 
       fs.readFile(path.join(mnt, 'less/cache.css'), { encoding: 'utf-8' }, function (err) {
         expect(err, 'to be null');
-
-        expect(self.emitSpy, 'was called');
         expect(self.emitSpy, 'was always called with exactly', 'info', 'cache hit', '/less/cache.css');
 
         done();
@@ -217,7 +213,7 @@ describe('when caching', function () {
           });
 
         });
-      }, 1000);
+      }, 1200);
     });
 
     it('should have a cache miss on fourth read when partial file was updated', function (done) {
@@ -227,13 +223,12 @@ describe('when caching', function () {
         fs.utimes(path.join(src, 'less/_cache_partial.less'), new Date(), new Date(), function () {
           fs.readFile(path.join(mnt, 'less/cache.css'), { encoding: 'utf-8' }, function (err) {
             expect(err, 'to be null');
-            expect(self.emitSpy, 'was called once');
             expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/less/cache.css');
 
             done();
           });
         });
-      }, 1000);
+      }, 1200);
     });
 
   });
