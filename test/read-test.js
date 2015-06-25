@@ -67,6 +67,7 @@ describe('In a mounted filesystem', function () {
       'csso',
       'dogescript',
       'ejs',
+      'errors',
       'escape-html',
       'extensions',
       'haml',
