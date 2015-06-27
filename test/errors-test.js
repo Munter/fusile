@@ -19,7 +19,7 @@ var node = require('when/node');
 var whenFs = node.liftAll(fs);
 
 var src = 'fixtures/source';
-// var compiled = 'fixtures/compiled';
+var compiled = 'fixtures/compiled';
 var mnt = 'test/ERROR';
 
 expect.addAssertion('string', 'to have file content', function (expect, subject, cmp) {
@@ -69,9 +69,9 @@ describe('when files have syntax errors', function () {
   });
 
   describe('with CSS', function () {
-    // it('should return an error stylesheet', function () {
-    //   return expect(path.join(mnt, 'errors/error.css'), 'to have file content', path.join(compiled, 'errors/error.css'));
-    // });
+    it('should return an error stylesheet', function () {
+      return expect(path.join(mnt, 'errors/error.css'), 'to have file content', path.join(compiled, 'errors/error.css'));
+    });
 
     it('should delete any cache entry', function () {
       var self = this;
