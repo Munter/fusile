@@ -17,6 +17,7 @@ var sinon = require('sinon');
 var when = require('when');
 var node = require('when/node');
 var whenFs = node.liftAll(fs);
+var exec = node.lift(require('child_process').exec);
 
 var src = 'fixtures/source';
 var compiled = 'fixtures/compiled';
@@ -81,6 +82,43 @@ describe('when files have syntax errors', function () {
       return whenFs.readFile(path.join(mnt, 'errors/error.css'))
         .then(function () {
           return expect(self.fusile.tolkCache, 'not to have property', '/errors/error.css');
+        });
+    });
+
+    it('should serve valid css when syntax error was fixed', function () {
+      var self = this;
+
+      return expect(path.join(mnt, 'errors/error.css'), 'to have file content', path.join(compiled, 'errors/error.css'))
+        .then(function () {
+          return whenFs.writeFile(path.join(src, 'errors/error.scss'), 'body { color: red; }');
+        })
+        .delay(100)
+        .then(function () {
+          return whenFs.readFile(path.join(mnt, 'errors/error.css'), 'utf8');
+        })
+        .then(function (result) {
+          return expect(result, 'to be', 'body {\n  color: red; }\n');
+        })
+        .then(function () {
+          return expect(self.fusile.tolkCache, 'to exhaustively satisfy', {
+            '/errors/error.css': {
+              compileTime: expect.it('to be a number'),
+              tolkPromise: expect.it('to be resolved')
+            }
+          });
+        })
+        .then(function () {
+          return whenFs.writeFile(path.join(src, 'errors/error.scss'), 'body {');
+        })
+        .delay(1700)
+        .then(function () {
+          return expect(path.join(mnt, 'errors/error.css'), 'to have file content', path.join(compiled, 'errors/error.css'));
+        })
+        .then(function () {
+          return expect(self.fusile.tolkCache, 'not to have property', '/errors/error.css');
+        })
+        .finally(function () {
+          return exec('git checkout fixtures/source/errors/error.scss');
         });
     });
   });
