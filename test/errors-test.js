@@ -100,17 +100,17 @@ describe('when files have syntax errors', function () {
           return expect(result, 'to be', 'body {\n  color: red; }\n');
         })
         .then(function () {
-          return expect(self.fusile.tolkCache, 'to exhaustively satisfy', {
+          return expect(self.fusile.tolkCache, 'to satisfy', {
             '/errors/error.css': {
               compileTime: expect.it('to be a number'),
               tolkPromise: expect.it('to be resolved')
             }
           });
         })
+        .delay(1000)
         .then(function () {
           return whenFs.writeFile(path.join(src, 'errors/error.scss'), 'body {');
         })
-        .delay(1700)
         .then(function () {
           return expect(path.join(mnt, 'errors/error.css'), 'to have file content', path.join(compiled, 'errors/error.css'));
         })
