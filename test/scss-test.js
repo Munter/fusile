@@ -61,4 +61,11 @@ describe('scss specifics', function () {
   it('should compile nested partials correctly', function () {
     return expect(path.join(mnt, 'scss/nestedpartials.css'), 'to have file content', path.join(compiled, 'scss/nestedpartials.css'));
   });
+
+  it('should cut the file reading after the error message has been sent if the file content is bigger than the error message', function () {
+    return whenFs.readFile(path.join(mnt, 'scss/massive-with-error.css'), 'utf8')
+      .then(function (result) {
+        expect(result, 'to match', /^body \* {display: none !important;} body:before {line-height: 1\.5; display: block; z-index: 99999999; white-space: pre; font-family: "Courier New", monospace; font-size: 20px; color: black; margin: 10px; padding: 10px; border: 4px dashed red; margin-bottom: 10px; content: "Transpiler error: .*?\/fixtures\/source\/scss\/massive-with-error\.scss:5:6\\00000ainvalid property name";}$/);
+      });
+  });
 });
