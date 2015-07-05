@@ -78,7 +78,7 @@ describe('when caching', function () {
       setTimeout(function () {
       fs.readFile(path.join(mnt, 'stylus/cache.css'), { encoding: 'utf-8' }, function (err) {
         expect(err, 'to be null');
-        expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/stylus/cache.css');
+        expect(self.emitSpy, 'was always called with', 'info', 'cache miss', '/stylus/cache.css');
 
         done();
       });
@@ -90,7 +90,7 @@ describe('when caching', function () {
 
       fs.readFile(path.join(mnt, 'stylus/cache.css'), { encoding: 'utf-8' }, function (err) {
         expect(err, 'to be null');
-        expect(self.emitSpy, 'was always called with exactly', 'info', 'cache hit', '/stylus/cache.css');
+        expect(self.emitSpy, 'was always called with', 'info', 'cache hit', '/stylus/cache.css');
 
         done();
       });
@@ -104,7 +104,7 @@ describe('when caching', function () {
 
           fs.readFile(path.join(mnt, 'stylus/cache.css'), { encoding: 'utf-8' }, function (err) {
             expect(err, 'to be null');
-            expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/stylus/cache.css');
+            expect(self.emitSpy, 'was always called with', 'info', 'cache miss', '/stylus/cache.css');
 
             done();
           });
@@ -124,7 +124,7 @@ describe('when caching', function () {
 
       fs.readFile(path.join(mnt, 'scss/cache.css'), { encoding: 'utf-8' }, function (err) {
         expect(err, 'to be null');
-        expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/scss/cache.css');
+        expect(self.emitSpy, 'was always called with', 'info', 'cache miss', '/scss/cache.css');
 
         done();
       });
@@ -135,7 +135,7 @@ describe('when caching', function () {
 
       fs.readFile(path.join(mnt, 'scss/cache.css'), { encoding: 'utf-8' }, function (err) {
         expect(err, 'to be null');
-        expect(self.emitSpy, 'was always called with exactly', 'info', 'cache hit', '/scss/cache.css');
+        expect(self.emitSpy, 'was always called with', 'info', 'cache hit', '/scss/cache.css');
 
         done();
       });
@@ -148,7 +148,7 @@ describe('when caching', function () {
         fs.utimes(path.join(src, 'scss/cache.scss'), new Date(), new Date(), function () {
             fs.readFile(path.join(mnt, 'scss/cache.css'), { encoding: 'utf-8' }, function (err) {
               expect(err, 'to be null');
-              expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/scss/cache.css');
+              expect(self.emitSpy, 'was always called with', 'info', 'cache miss', '/scss/cache.css');
 
               done();
             });
@@ -164,7 +164,7 @@ describe('when caching', function () {
         fs.utimes(path.join(src, 'scss/_cache_partial.scss'), new Date(), new Date(), function () {
           fs.readFile(path.join(mnt, 'scss/cache.css'), { encoding: 'utf-8' }, function (err) {
             expect(err, 'to be null');
-            expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/scss/cache.css');
+            expect(self.emitSpy, 'was always called with', 'info', 'cache miss', '/scss/cache.css');
 
             done();
           });
@@ -183,7 +183,7 @@ describe('when caching', function () {
 
       fs.readFile(path.join(mnt, 'less/cache.css'), { encoding: 'utf-8' }, function (err) {
         expect(err, 'to be null');
-        expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/less/cache.css');
+        expect(self.emitSpy, 'was always called with', 'info', 'cache miss', '/less/cache.css');
 
         done();
       });
@@ -194,7 +194,7 @@ describe('when caching', function () {
 
       fs.readFile(path.join(mnt, 'less/cache.css'), { encoding: 'utf-8' }, function (err) {
         expect(err, 'to be null');
-        expect(self.emitSpy, 'was always called with exactly', 'info', 'cache hit', '/less/cache.css');
+        expect(self.emitSpy, 'was always called with', 'info', 'cache hit', '/less/cache.css');
 
         done();
       });
@@ -207,7 +207,7 @@ describe('when caching', function () {
         fs.utimes(path.join(src, 'less/cache.less'), new Date(), new Date(), function () {
           fs.readFile(path.join(mnt, 'less/cache.css'), { encoding: 'utf-8' }, function (err) {
             expect(err, 'to be null');
-            expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/less/cache.css');
+            expect(self.emitSpy, 'was always called with', 'info', 'cache miss', '/less/cache.css');
 
             done();
           });
@@ -223,7 +223,7 @@ describe('when caching', function () {
         fs.utimes(path.join(src, 'less/_cache_partial.less'), new Date(), new Date(), function () {
           fs.readFile(path.join(mnt, 'less/cache.css'), { encoding: 'utf-8' }, function (err) {
             expect(err, 'to be null');
-            expect(self.emitSpy, 'was always called with exactly', 'info', 'cache miss', '/less/cache.css');
+            expect(self.emitSpy, 'was always called with', 'info', 'cache miss', '/less/cache.css');
 
             done();
           });
