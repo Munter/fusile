@@ -26,10 +26,12 @@ var mnt = 'test/ERROR';
 expect.addAssertion('string', 'to have file content', function (expect, subject, cmp) {
   return when.all([
     whenFs.readFile(subject, 'utf8'),
-    whenFs.readFile(cmp, 'utf8').catch(function () {
-      return cmp;
-    })
+    whenFs.readFile(cmp, 'utf8')
   ]).then(function (results) {
+    results = results.map(function (result) {
+      return result.replace(/: .*?fusile\//g, ': fusile/');
+    });
+
     return expect(results[0], 'to satisfy', results[1]);
   });
 });
