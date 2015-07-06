@@ -82,6 +82,7 @@ describe('when files have syntax errors', function () {
       self.fusile.tolkCache['/errors/error.css'] = { fail: false };
 
       return whenFs.readFile(path.join(mnt, 'errors/error.css'))
+        .delay(1)
         .then(function () {
           return expect(self.fusile.tolkCache, 'not to have property', '/errors/error.css');
         });
@@ -116,6 +117,7 @@ describe('when files have syntax errors', function () {
         .then(function () {
           return expect(path.join(mnt, 'errors/error.css'), 'to have file content', path.join(compiled, 'errors/error.css'));
         })
+        .delay(1)
         .then(function () {
           return expect(self.fusile.tolkCache, 'not to have property', '/errors/error.css');
         })
