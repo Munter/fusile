@@ -54,7 +54,7 @@ Once you've mounted the new transpiled source directory, point your browser, web
 
 ## Project status
 
-Status: pre-alpha prototype. Use at own risk
+Status: Fairly well tested. Need real world exposure. Feedback appreciated!
 
 ## Roadmap
 
