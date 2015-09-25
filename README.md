@@ -1,4 +1,6 @@
 # fusile
+
+[![Join the chat at https://gitter.im/Munter/fusile](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Munter/fusile?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 A web asset precompiling file system proxy.
 
 Mounts a fuse file system on a target directory, auto loads available compilers, compiles assets on request, caches compiled assets if source file is unmodified, watches original file for changes on demand.
