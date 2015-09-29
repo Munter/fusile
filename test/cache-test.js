@@ -239,17 +239,19 @@ describe('when caching', function () {
 
       setTimeout(function () {
 
-        // Write the contents of src/.../simplest_update.jsx into src/.../simplest.jsx
-        fs.readFile(path.join(src, 'babel/simplest_update.jsx'), {encoding: 'utf-8'}, function (err, updateContents) {
+        // Write the contents of src/.../simple_template_string_update.jsx into src/.../simple_template_string.jsx
+        fs.readFile(path.join(src, 'babel/simple_template_string_update.jsx'), {encoding: 'utf-8'}, function (err, updateContents) {
           expect(err, 'to be null');
-          fs.writeFile(path.join(src, 'babel/simplest.jsx'), updateContents, {encoding: 'utf-8'}, function (err) {
+          fs.writeFile(path.join(src, 'babel/simple_template_string.jsx'), updateContents, {encoding: 'utf-8'}, function (err) {
             expect(err, 'to be null');
+
             // Check that the next read actually returns an updated compiled version
-            fs.readFile(path.join(mnt, 'babel/simplest.jsx'), {encoding: 'utf-8'}, function (err, compiledContents) {
+            fs.readFile(path.join(mnt, 'babel/simple_template_string.jsx'), {encoding: 'utf-8'}, function (err, compiledContents) {
               expect(err, 'to be null');
               expect(compiledContents, 'to contain', 'bar_again');
               done();
             });
+
           });
         });
 
