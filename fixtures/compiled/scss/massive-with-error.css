@@ -14,5 +14,5 @@ body:before {
   padding: 10px;
   border: 4px dashed red;
   margin-bottom: 10px;
-  content: "Transpiler error: fusile\00002ffixtures\00002fsource\00002ferrors\00002ferror\00002escss:1:6\00000ainvalid property name";
+  content: "Transpiler error: \00002fUsers\00002fmunter\00002fgit\00002ffusile\00002ffixtures\00002fsource\00002fscss\00002fmassive\00002dwith\00002derror\00002escss:5:6\00000ainvalid property name";
 }

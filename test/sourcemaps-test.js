@@ -14,7 +14,6 @@ var whenFs = node.liftAll(fs);
 
 var expect = require('unexpected')
   .clone()
-  .installPlugin(require('unexpected-promise'))
   .installPlugin(require('unexpected-sinon'));
 
 expect.addAssertion('string', 'to have file content', function (expect, subject, cmp) {

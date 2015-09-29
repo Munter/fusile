@@ -13,8 +13,7 @@ var node = require('when/node');
 var whenFs = node.liftAll(fs);
 
 var expect = require('unexpected')
-  .clone()
-  .installPlugin(require('unexpected-promise'));
+  .clone();
 
 expect.addAssertion('string', 'to have file content', function (expect, subject, cmp) {
   return when.all([
@@ -58,7 +57,7 @@ describe('In a mounted filesystem', function () {
   });
 
   it('should read a directory', function () {
-    return expect(whenFs.readdir(mnt), 'to be resolved with', [
+    return expect(whenFs.readdir(mnt), 'to be fulfilled with', [
       'autoprefixer',
       'babel',
       'basic.css',
@@ -91,7 +90,7 @@ describe('In a mounted filesystem', function () {
   });
 
   it('should translate extensions when reading a directory', function () {
-    return expect(whenFs.readdir(mnt + '/extensions'), 'to be resolved with', [
+    return expect(whenFs.readdir(mnt + '/extensions'), 'to be fulfilled with', [
       'babel.js',
       'coco.js',
       'coffee.js',

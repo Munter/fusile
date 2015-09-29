@@ -13,15 +13,18 @@ var node = require('when/node');
 var whenFs = node.liftAll(fs);
 
 var expect = require('unexpected')
-  .clone()
-  .installPlugin(require('unexpected-promise'));
+  .clone();
 
 expect.addAssertion('string', 'to have file content', function (expect, subject, cmp) {
   return when.all([
     whenFs.readFile(subject, 'utf8'),
     whenFs.readFile(cmp, 'utf8')
   ]).then(function (results) {
-    return expect(results[0], 'to equal', results[1]);
+    results = results.map(function (result) {
+      return result.replace(/\\00002f/g, '/').replace().replace(/: [^ ]*?fusile/g, ': fusile');
+    });
+
+    return expect(results[0], 'to satisfy', results[1]);
   });
 });
 
@@ -63,9 +66,6 @@ describe('scss specifics', function () {
   });
 
   it('should cut the file reading after the error message has been sent if the file content is bigger than the error message', function () {
-    return whenFs.readFile(path.join(mnt, 'scss/massive-with-error.css'), 'utf8')
-      .then(function (result) {
-        expect(result, 'to match', /^body \* {display: none !important;} body:before {line-height: 1\.5; display: block; z-index: 99999999; white-space: pre; font-family: "Courier New", monospace; font-size: 20px; color: black; margin: 10px; padding: 10px; border: 4px dashed red; margin-bottom: 10px; content: "Transpiler error: .*?\/fixtures\/source\/scss\/massive-with-error\.scss:5:6\\00000ainvalid property name";}$/);
-      });
+    return expect(path.join(mnt, 'scss/massive-with-error.css'), 'to have file content', path.join(compiled, 'scss/massive-with-error.css'));
   });
 });

@@ -33,7 +33,7 @@
   "bin": "bin/fusile-bin.js",
   "dependencies": {
     "chalk": "^1.0.0",
-    "csserror": "^1.1.0",
+    "csserror": "1.1.2",
     "errno": "^0.1.1",
     "fuse-bindings": "^2.4.3",
     "gaze": "^0.5.1",
@@ -64,8 +64,7 @@
     "sinon": "^1.14.1",
     "stylus": "0.50.0",
     "swig": "1.4.2",
-    "unexpected": "^8.1.0",
-    "unexpected-promise": "^1.2.0",
-    "unexpected-sinon": "^6.3.0"
+    "unexpected": "9.16.0",
+    "unexpected-sinon": "7.3.0"
   }
 }
