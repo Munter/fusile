@@ -235,6 +235,8 @@ describe('when caching', function () {
 
   describe('compiled file with no partials, babel/simplest.jsx', function () {
 
+    // Addresses #20 - sometimes the first read after an update would yield the old version
+
     it('should yield an updated version of the file on first read after update', function (done) {
 
       setTimeout(function () {
