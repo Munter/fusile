@@ -233,4 +233,30 @@ describe('when caching', function () {
 
   });
 
+  describe('compiled file with no partials, babel/simplest.jsx', function () {
+
+    it('should yield an updated version of the file on first read after update', function (done) {
+
+      setTimeout(function () {
+
+        // Write the contents of src/.../simplest_update.jsx into src/.../simplest.jsx
+        fs.readFile(path.join(src, 'babel/simplest_update.jsx'), {encoding: 'utf-8'}, function (err, updateContents) {
+          expect(err, 'to be null');
+          fs.writeFile(path.join(src, 'babel/simplest.jsx'), updateContents, {encoding: 'utf-8'}, function (err) {
+            expect(err, 'to be null');
+            // Check that the next read actually returns an updated compiled version
+            fs.readFile(path.join(mnt, 'babel/simplest.jsx'), {encoding: 'utf-8'}, function (err, compiledContents) {
+              expect(err, 'to be null');
+              expect(compiledContents, 'to contain', 'bar_again');
+              done();
+            });
+          });
+        });
+
+      }, 1200);
+
+    });
+
+  });
+
 });
