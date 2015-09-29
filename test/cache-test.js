@@ -241,14 +241,22 @@ describe('when caching', function () {
 
       setTimeout(function () {
 
-        // Write the contents of src/.../simple_template_string_update.jsx into src/.../simple_template_string.jsx
+        // Copy src/.../simple_template_string into tmp/simple_template_string since we'll be modifying it
+        fs.createReadStream(
+            path.join(src, 'babel/simple_template_string.jsx')
+        ).pipe(fs.createWriteStream(
+            path.join(src, 'tmp/simple_template_string.jsx')
+        ));
+
+        // Write the contents of src/.../simple_template_string_update into tmp/simple_template_string
         fs.readFile(path.join(src, 'babel/simple_template_string_update.jsx'), {encoding: 'utf-8'}, function (err, updateContents) {
           expect(err, 'to be null');
-          fs.writeFile(path.join(src, 'babel/simple_template_string.jsx'), updateContents, {encoding: 'utf-8'}, function (err) {
+          fs.writeFile(path.join(src, 'tmp/simple_template_string.jsx'), updateContents, {encoding: 'utf-8'}, function (err) {
             expect(err, 'to be null');
 
             // Check that the next read actually returns an updated compiled version
-            fs.readFile(path.join(mnt, 'babel/simple_template_string.jsx'), {encoding: 'utf-8'}, function (err, compiledContents) {
+            fs.readFile(path.join(mnt, 'tmp/simple_template_string.jsx'), {encoding: 'utf-8'}, function (err, compiledContents) {
+              console.log(compiledContents.toString());
               expect(err, 'to be null');
               expect(compiledContents, 'to contain', 'bar_again');
               done();
