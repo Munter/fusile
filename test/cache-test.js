@@ -15,24 +15,31 @@ var expect = require('unexpected')
 var sinon = require('sinon');
 
 var src = 'fixtures/source';
+var srcTmp = 'fixtures/source/tmp';
 var mnt = 'test/CACHE';
 
 describe('when caching', function () {
   before(function (done) {
     var self = this;
     fuse.unmount(mnt, function () {
-      mkdirp(mnt, function (err) {
+      mkdirp(srcTmp, function (err) {
         if (err) {
           console.error(err);
           process.exit(-1);
         }
+        mkdirp(mnt, function (err) {
+          if (err) {
+            console.error(err);
+            process.exit(-1);
+          }
 
-        self.fusile = fusile(src, mnt, {
-          // verbose: true,
-          sourceMap: false
+          self.fusile = fusile(src, mnt, {
+            // verbose: true,
+            sourceMap: false
+          });
+
+          setTimeout(done, 1800);
         });
-
-        setTimeout(done, 1800);
       });
     });
   });
@@ -256,7 +263,6 @@ describe('when caching', function () {
 
             // Check that the next read actually returns an updated compiled version
             fs.readFile(path.join(mnt, 'tmp/simple_template_string.jsx'), {encoding: 'utf-8'}, function (err, compiledContents) {
-              console.log(compiledContents.toString());
               expect(err, 'to be null');
               expect(compiledContents, 'to contain', 'bar_again');
               done();
