@@ -1,6 +1,6 @@
 {
   "name": "fusile",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A web asset precompiling file system proxy",
   "main": "lib/index.js",
   "files": [
