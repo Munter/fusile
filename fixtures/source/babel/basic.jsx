@@ -1,5 +1,6 @@
 class Test extends TestClass {
   constructor(greeting) {
+    super();
     this.greeting = greeting;
   }
 
