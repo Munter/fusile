@@ -1,6 +1,11 @@
 # fusile
 
-[![Join the chat at https://gitter.im/Munter/fusile](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Munter/fusile?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![NPM Version][npm-image]][npm-url]
+[![NPM Downloads][downloads-image]][downloads-url]
+[![Linux Build][travis-image]][travis-url]
+<!--[![Windows Build][appveyor-image]][appveyor-url]-->
+[![Test Coverage][coveralls-image]][coveralls-url]
+[![Join the chat][gitter-image]][gitter-url]
 
 A web asset precompiling file system proxy.
 
@@ -96,3 +101,17 @@ Note that watcher glob patterns are quoted to avoid shell expansion of the glob 
 
 ## License
 MIT
+
+
+[npm-image]: https://img.shields.io/npm/v/fusile.svg
+[npm-url]: https://npmjs.org/package/fusile
+[downloads-image]: https://img.shields.io/npm/dm/fusile.svg
+[downloads-url]: https://npmjs.org/package/fusile
+[travis-image]: https://img.shields.io/travis/Munter/fusile/master.svg?label=linux
+[travis-url]: https://travis-ci.org/Munter/fusile
+[appveyor-image]: https://img.shields.io/appveyor/ci/Munter/fusile/master.svg?label=windows
+[appveyor-url]: https://ci.appveyor.com/project/Munter/fusile
+[coveralls-image]: https://img.shields.io/coveralls/Munter/fusile/master.svg
+[coveralls-url]: https://coveralls.io/r/Munter/fusile?branch=master
+[gitter-image]: https://badges.gitter.im/Join%20Chat.svg
+[gitter-url]: https://gitter.im/Munter/fusile?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
