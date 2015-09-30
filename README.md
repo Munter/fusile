@@ -106,15 +106,15 @@ MIT
 
 [npm-image]: https://img.shields.io/npm/v/fusile.svg
 [npm-url]: https://npmjs.org/package/fusile
-[travis-image]: https://img.shields.io/travis/Munter/fusile/master.svg?branch=master
+[travis-image]: https://img.shields.io/travis/Munter/fusile/master.svg
 [travis-url]: https://travis-ci.org/Munter/fusile
 [appveyor-image]: https://img.shields.io/appveyor/ci/Munter/fusile/master.svg?label=windows
 [appveyor-url]: https://ci.appveyor.com/project/Munter/fusile
 [coveralls-image]: https://img.shields.io/coveralls/Munter/fusile/master.svg
 [coveralls-url]: https://coveralls.io/r/Munter/fusile?branch=master
-[dep-url]: https://david-dm.org/greenkeeperio/greenkeeper/master
-[dep-image]: https://david-dm.org/greenkeeperio/greenkeeper/master.svg
-[devDep-url]: https://david-dm.org/greenkeeperio/greenkeeper/master#info=devDependencies
-[devDep-image]: https://david-dm.org/greenkeeperio/greenkeeper/master/dev-status.svg
+[dep-url]: https://david-dm.org/Munter/fusile/master
+[dep-image]: https://img.shields.io/david/Munter/fusile.svg?label=deps
+[devDep-url]: https://david-dm.org/Munter/fusile/master#info=devDependencies
+[devDep-image]: https://img.shields.io/david/dev/Munter/fusile.svg?label=devDeps
 [gitter-image]: https://badges.gitter.im/chat.svg
 [gitter-url]: https://gitter.im/Munter/fusile
