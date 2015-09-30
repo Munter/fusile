@@ -1,8 +1,25 @@
+sudo: required
+services:
+  - docker
 language: node_js
 node_js:
-  - "0.10"
-  - "0.12"
-before_install: "sudo apt-get update && sudo apt-get install libfuse-dev && sudo modprobe fuse"
+  - '4'
+  - '3'
+  - '2'
+  - '1'
+  - '0.12'
+  - '0.11'
+  - '0.10'
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-4.8
+      - g++-4.8
+env: CXX="g++-4.8" CC="gcc-4.8"
+
+before_install: "sudo apt-get update && sudo apt-get install libfuse-dev"
 script: "npm run-script travis"
 after_success: "<coverage/lcov.info ./node_modules/coveralls/bin/coveralls.js"
 
