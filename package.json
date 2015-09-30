@@ -11,7 +11,8 @@
     "lint": "jshint .",
     "test": "npm run lint && mocha",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- --reporter dot",
-    "travis": "npm run lint"
+    "travis": "npm run lint",
+    "appveyor": "npm run test"
   },
   "repository": {
     "type": "git",
