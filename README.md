@@ -109,8 +109,8 @@ MIT
 [downloads-url]: https://npmjs.org/package/fusile
 [travis-image]: https://img.shields.io/travis/Munter/fusile/master.svg?label=linux
 [travis-url]: https://travis-ci.org/Munter/fusile
-[appveyor-image]: https://img.shields.io/appveyor/ci/Munter/fusile/master.svg?label=windows
-[appveyor-url]: https://ci.appveyor.com/project/Munter/fusile
+[appveyor-image]: https://ci.appveyor.com/api/projects/status/884kitlr82n8ri19?svg=true
+[appveyor-url]: https://ci.appveyor.com/project/PeterMller/fusile
 [coveralls-image]: https://img.shields.io/coveralls/Munter/fusile/master.svg
 [coveralls-url]: https://coveralls.io/r/Munter/fusile?branch=master
 [gitter-image]: https://badges.gitter.im/Join%20Chat.svg
