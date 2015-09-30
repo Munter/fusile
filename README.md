@@ -1,9 +1,10 @@
 # fusile
 
 [![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
 [![Linux Build][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
+[![Dependency Status][dep-image]][dep-url]
+[![devDependency Status][devDep-image]][devDep-url]
 [![Join the chat][gitter-image]][gitter-url]
 <!--[![Windows Build][appveyor-image]][appveyor-url]-->
 
@@ -105,13 +106,15 @@ MIT
 
 [npm-image]: https://img.shields.io/npm/v/fusile.svg
 [npm-url]: https://npmjs.org/package/fusile
-[downloads-image]: https://img.shields.io/npm/dm/fusile.svg
-[downloads-url]: https://npmjs.org/package/fusile
-[travis-image]: https://img.shields.io/travis/Munter/fusile/master.svg?label=linux
+[travis-image]: https://img.shields.io/travis/Munter/fusile/master.svg
 [travis-url]: https://travis-ci.org/Munter/fusile
 [appveyor-image]: https://img.shields.io/appveyor/ci/Munter/fusile/master.svg?label=windows
 [appveyor-url]: https://ci.appveyor.com/project/Munter/fusile
 [coveralls-image]: https://img.shields.io/coveralls/Munter/fusile/master.svg
 [coveralls-url]: https://coveralls.io/r/Munter/fusile?branch=master
-[gitter-image]: https://badges.gitter.im/Join%20Chat.svg
-[gitter-url]: https://gitter.im/Munter/fusile?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+[dep-url]: https://david-dm.org/greenkeeperio/greenkeeper/master
+[dep-image]: https://david-dm.org/greenkeeperio/greenkeeper/master.svg
+[devDep-url]: https://david-dm.org/greenkeeperio/greenkeeper/master#info=devDependencies
+[devDep-image]: https://david-dm.org/greenkeeperio/greenkeeper/master/dev-status.svg
+[gitter-image]: https://badges.gitter.im/chat.svg
+[gitter-url]: https://gitter.im/Munter/fusile
