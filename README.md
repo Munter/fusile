@@ -106,7 +106,7 @@ MIT
 
 [npm-image]: https://img.shields.io/npm/v/fusile.svg
 [npm-url]: https://npmjs.org/package/fusile
-[travis-image]: https://img.shields.io/travis/Munter/fusile/master.svg
+[travis-image]: https://img.shields.io/travis/Munter/fusile/master.svg?branch=master
 [travis-url]: https://travis-ci.org/Munter/fusile
 [appveyor-image]: https://img.shields.io/appveyor/ci/Munter/fusile/master.svg?label=windows
 [appveyor-url]: https://ci.appveyor.com/project/Munter/fusile
