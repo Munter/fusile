@@ -3,9 +3,9 @@
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Linux Build][travis-image]][travis-url]
+[![Windows Build][appveyor-image]][appveyor-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 [![Join the chat][gitter-image]][gitter-url]
-<!--[![Windows Build][appveyor-image]][appveyor-url]-->
 
 A web asset precompiling file system proxy.
 
