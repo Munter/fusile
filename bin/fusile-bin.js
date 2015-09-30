@@ -41,9 +41,8 @@ mkdirp(mountPoint, function () {
     console.log('To stop it, press Ctrl+C');
   });
 
-  instance.on('error', function (err) {
+  instance.on('transpilererror', function (err) {
     console.error(err.message);
-    console.error('\tat', [err.file, err.line, err.column].join(':'));
   });
 
   var kill = function () {

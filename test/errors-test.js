@@ -9,7 +9,6 @@ var rimraf = require('rimraf');
 
 var expect = require('unexpected')
   .clone()
-  .installPlugin(require('unexpected-promise'))
   .installPlugin(require('unexpected-sinon'));
 
 var sinon = require('sinon');
@@ -29,7 +28,7 @@ expect.addAssertion('string', 'to have file content', function (expect, subject,
     whenFs.readFile(cmp, 'utf8')
   ]).then(function (results) {
     results = results.map(function (result) {
-      return result.replace(/: .*?fusile\//g, ': fusile/');
+      return result.replace(/\\00002f/g, '/').replace().replace(/: [^ ]*?fusile/g, ': fusile');
     });
 
     return expect(results[0], 'to satisfy', results[1]);
@@ -106,7 +105,7 @@ describe('when files have syntax errors', function () {
           return expect(self.fusile.tolkCache, 'to satisfy', {
             '/errors/error.css': {
               compileTime: expect.it('to be a number'),
-              tolkPromise: expect.it('to be resolved')
+              tolkPromise: expect.it('to be fulfilled')
             }
           });
         })

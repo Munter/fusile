@@ -9,7 +9,6 @@ var rimraf = require('rimraf');
 
 var expect = require('unexpected')
   .clone()
-  .installPlugin(require('unexpected-promise'))
   .installPlugin(require('unexpected-sinon'));
 
 var sinon = require('sinon');
