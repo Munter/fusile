@@ -49,7 +49,7 @@
     "autoprefixer-core": "5.2.1",
     "babel": "5.8.23",
     "coco": "0.9.1",
-    "coffee-script": "1.9.1",
+    "coffee-script": "1.10.0",
     "coveralls": "2.11.4",
     "css-parse": "2.0.0",
     "dogescript": "2.3.0",
