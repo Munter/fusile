@@ -65,6 +65,6 @@
     "stylus": "0.52.4",
     "swig": "1.4.2",
     "unexpected": "9.16.0",
-    "unexpected-sinon": "7.3.0"
+    "unexpected-sinon": "8.0.0"
   }
 }
