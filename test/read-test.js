@@ -15,7 +15,7 @@ var whenFs = node.liftAll(fs);
 var expect = require('unexpected')
   .clone();
 
-expect.addAssertion('string', 'to have file content', function (expect, subject, cmp) {
+expect.addAssertion('<string> to have file content <string>', function (expect, subject, cmp) {
   return when.all([
     whenFs.readFile(subject, 'utf8'),
     whenFs.readFile(cmp, 'utf8')
