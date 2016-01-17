@@ -8,7 +8,7 @@
 [![Join the chat][gitter-image]][gitter-url]
 <!--[![Windows Build][appveyor-image]][appveyor-url]-->
 
-A web asset precompiling file system proxy.
+A web asset precompiling file system proxy. See the [JSConf.eu talk: Transpiling Recomposed](https://www.youtube.com/watch?v=MptY6ff4tOQ)
 
 Mounts a fuse file system on a target directory, auto loads available compilers, compiles assets on request, caches compiled assets if source file is unmodified, watches original file for changes on demand.
 
