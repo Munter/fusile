@@ -1,5 +1,8 @@
 'use strict';
 
+// work around as requiring babel at runtime caused a timeout on travis.
+require('babel-core').transform('const foo="bar"', { presets: [ 'es2015' ] });
+
 var fusile = require('../lib/');
 var fuse = require('fuse-bindings');
 var fs = require('fs');
