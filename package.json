@@ -42,7 +42,7 @@
     "mkdirp": "0.5.1",
     "rimraf": "2.4.3",
     "tolk": "1.1.3",
-    "when": "3.7.3"
+    "when": "3.7.4"
   },
   "devDependencies": {
     "LiveScript": "1.3.1",
