@@ -1,7 +1,6 @@
 body * {
   display: none !important;
 }
-
 body:before {
   line-height: 1.5;
   display: block;
@@ -10,9 +9,10 @@ body:before {
   font-family: "Courier New", monospace;
   font-size: 20px;
   color: black;
+  background-color: white;
   margin: 10px;
   padding: 10px;
   border: 4px dashed red;
   margin-bottom: 10px;
-  content: "Transpiler error: fusile/fixtures/source/errors/error\00002escss:1:7\00000aInvalid CSS after \000022body {\000022: expected \000022}\000022\00002c was \000022\000022";
+  content: "Transpiler error: fusile/fixtures/source/errors/error\2e scss:1:7\a Invalid CSS after \22 body {\22 : expected \22 }\22 \2c  was \22 \22 ";
 }

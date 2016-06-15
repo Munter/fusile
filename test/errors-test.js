@@ -28,7 +28,7 @@ expect.addAssertion('<string> to have file content <string>', function (expect, 
     whenFs.readFile(cmp, 'utf8')
   ]).then(function (results) {
     results = results.map(function (result) {
-      return result.replace(/\\00002f/g, '/').replace().replace(/: [^ ]*?fusile/g, ': fusile');
+      return result.replace(/\\2f /g, '/').replace().replace(/: [^ ]*?fusile/g, ': fusile');
     });
 
     return expect(results[0], 'to satisfy', results[1]);
