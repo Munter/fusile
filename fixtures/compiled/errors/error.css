@@ -14,5 +14,5 @@ body:before {
   padding: 10px;
   border: 4px dashed red;
   margin-bottom: 10px;
-  content: "Transpiler error: fusile\00002ffixtures\00002fsource\00002ferrors\00002ferror\00002escss:1:6\00000ainvalid property name";
+  content: "Transpiler error: fusile/fixtures/source/errors/error\00002escss:1:7\00000aInvalid CSS after \000022body {\000022: expected \000022}\000022\00002c was \000022\000022";
 }

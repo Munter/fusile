@@ -111,7 +111,7 @@ describe('when files have syntax errors', function () {
         })
         .delay(1000)
         .then(function () {
-          return whenFs.writeFile(path.join(src, 'errors/error.scss'), 'body {');
+          return whenFs.writeFile(path.join(src, 'errors/error.scss'), 'body {\n');
         })
         .then(function () {
           return expect(path.join(mnt, 'errors/error.css'), 'to have file content', path.join(compiled, 'errors/error.css'));
