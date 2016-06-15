@@ -54,7 +54,7 @@ npm install -g fusile
 
 **General usage:** `fusile <sourceDir> <mountPoint>`
 
-Fusile is a compiling file system proxy. In order to get it to compile your assets you need to install one or more of these precompilers: `LiveScript`, `babel`, `coco`, `coffee-script`, `dogescript`, `less`, `marked`, `myth`, `node-sass`, `stylus`, `swig`
+Fusile is a compiling file system proxy. In order to get it to compile your assets you need to install one or more of these precompilers: `LiveScript`, `babel-core`, `coco`, `coffee-script`, `dogescript`, `less`, `marked`, `myth`, `node-sass`, `stylus`, `swig`
 
 When any of the above precompilers are available in the context of fusile (in your project root or globally installed), fusile will automatically load it and start compiling files with the corresponding file extension when you read the files from the mountpoint.
 
