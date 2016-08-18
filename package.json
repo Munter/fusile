@@ -54,7 +54,7 @@
     "css-parse": "2.0.0",
     "dogescript": "2.3.0",
     "istanbul": "^0.4.3",
-    "jshint": "^2.9.2",
+    "jshint": "^2.9.3",
     "less": "2.7.1",
     "marked": "0.3.5",
     "mocha": "^2.5.3",
