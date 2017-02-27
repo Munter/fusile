@@ -64,7 +64,7 @@
     "sinon": "1.17.4",
     "stylus": "0.54.5",
     "swig": "1.4.2",
-    "unexpected": "^10.13.3",
+    "unexpected": "^10.26.2",
     "unexpected-sinon": "^10.2.1"
   }
 }
