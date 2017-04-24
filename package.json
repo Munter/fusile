@@ -57,7 +57,7 @@
     "jshint": "^2.9.2",
     "less": "2.7.1",
     "marked": "0.3.5",
-    "mocha": "^2.5.3",
+    "mocha": "^3.3.0",
     "mocha-lcov-reporter": "^1.2.0",
     "myth": "1.5.0",
     "node-sass": "^3.8.0",
